@@ -6,6 +6,7 @@ from django.contrib.auth.models import User
 
 
 class Category(models.Model):
+    # Need to be change for helpful categories for our Project
     NAME_MAX_LENGTH = 128
     name = models.CharField(max_length=NAME_MAX_LENGTH, unique=True)
     views = models.IntegerField(default=0)
@@ -24,6 +25,7 @@ class Category(models.Model):
 
 
 class Page(models.Model):
+    # Change this one to places
     TITLE_MAX_LENGTH = 128
     URL_MAX_LENGTH = 200
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
@@ -36,6 +38,7 @@ class Page(models.Model):
 
 
 class UserProfile(models.Model):
+    # Keep this and add more to it
     user = models.OneToOneField(User, on_delete=models.CASCADE)
 
     website = models.URLField(blank=True)

@@ -8,7 +8,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from datetime import datetime  
 
-
+# Change name of vars and methods amd add more helpul views to our Project
 def index(request):
 
     category_list = Category.objects.order_by('-likes')[:5]

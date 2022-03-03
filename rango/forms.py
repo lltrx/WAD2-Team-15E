@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 
 
 class CategoryForm(forms.ModelForm):
+    # Change name of vars and types
     name = forms.CharField(max_length=128,
                            help_text="Please enter the category name.")
     views = forms.IntegerField(widget=forms.HiddenInput(), initial=0)
@@ -16,6 +17,7 @@ class CategoryForm(forms.ModelForm):
 
 
 class PageForm(forms.ModelForm):
+    # Change name of var and the type this one is helpful for places
     title = forms.CharField(max_length=128,
                             help_text="Please enter the title of the page.")
     url = forms.URLField(max_length=200,

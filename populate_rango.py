@@ -10,6 +10,8 @@ from rango.models import Category, Page
 
 def populate():
     python_pages = [
+        # We can add some example of places here 
+        # Also views and comment
         {'title': 'Official Python Tutorial',
          'url': 'http://docs.python.org/3/tutorial/',
          'views':10},
