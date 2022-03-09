@@ -1,17 +1,15 @@
 {% extends 'rango/base.html' %} {% load staticfiles %} {% block title_block %}
 Homepage {% endblock %} {% block body_block %}
-<h1>Rango says...</h1>
 <div>
   {% if user.is_authenticated %}
-    howdy {{ user.username }}!
+   <h2> Welcome back {{ user.username }}! </h2> 
   {% else %}
     hey there partner!
   {% endif %}
-  <strong>{{ boldmessage }}</strong><br />
 </div>
 
 <div>
-  <h2>Most Liked Categories</h2>
+  <h2>Most Liked Places</h2>
   {% if categories %}
   <ul>
     {% for category in categories %}
