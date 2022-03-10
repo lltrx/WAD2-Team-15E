@@ -1,16 +1,16 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from rango.models import Category, Page
-from rango.forms import CategoryForm, PageForm, UserForm, UserProfileForm
 from django.urls import reverse
 from django.http.response import HttpResponseNotModified
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from datetime import datetime  
+from datetime import datetime
+#from rango.models import Category, Page
+#from rango.forms import CategoryForm, PageForm, UserForm, UserProfileForm
 
 # Change name of vars and methods amd add more helpul views to our Project
 def index(request):
-
+    '''
     category_list = Category.objects.order_by('-likes')[:5]
     page_list = Page.objects.order_by('-views')[:5]
     
@@ -21,19 +21,23 @@ def index(request):
     context_dict['pages'] = page_list
 
     visitor_cookie_handler(request)
-    return render(request, 'rango/index.html', context=context_dict)
+    return render(request, 'rango/index.html', context=context_dict)'''
+    return HttpResponse("Rango says hey there partner!")
  
 
 
 def about(request):
+    '''
     print(request.method)
     print(request.user)
     visitor_cookie_handler(request)
     context_dict = {}
     context_dict['visits'] = request.session['visits']
     return render(request, 'rango/about.html', context_dict)
+    '''
+    return HttpResponse("Rango says hey there partner from about!")
 
-
+'''
 def show_category(request, category_name_slug):
     context_dict = {}
 
@@ -169,3 +173,4 @@ def visitor_cookie_handler(request):
         request.session['last_visit'] = last_visit_cookie
         
     request.session['visits'] = visits
+'''
