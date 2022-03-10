@@ -9,6 +9,7 @@ from datetime import datetime
 #from rango.forms import CategoryForm, PageForm, UserForm, UserProfileForm
 
 # Change name of vars and methods amd add more helpul views to our Project
+'''
 def index(request):
     '''
     category_list = Category.objects.order_by('-likes')[:5]
