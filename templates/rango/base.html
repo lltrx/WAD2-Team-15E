@@ -5,14 +5,18 @@
     <meta charset="UTF-8" />
     <title>
       
-      Histrocal places - {% block title_block %} <!--How to Tango with Django! --> {% endblock %}
+      Historical places - {% block title_block %} <!--How to Tango with Django! --> {% endblock %}
     </title>
   </head>
   <body>
     <div>
       <ul>
+        <div>
+          {% block sidebar_block %} Sidebar {% endblock %}
+        </div>
         <a href="{% url 'rango:index' %}">Home</a>
         <a href="{% url 'rango:help' %}">Help</a>
+        <a href="{% url 'rango:destination' %}">Destination</a>
         <!-- {% if user.is_authenticated %}
           <a href="{% url 'rango:logout' %}">Sign out</a>
           <li><a href="{% url 'rango:add_category' %}">Add New Category</a></li>  
@@ -24,9 +28,7 @@
     </div>
 
     <div>{% block body_block %} {% endblock %}</div>
-    <div>
-      {% block sidebar_block %} Sidebar {% endblock %}
-    </div>
+    
     <hr />
 
   </body>

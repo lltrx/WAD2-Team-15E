@@ -8,6 +8,7 @@ urlpatterns = [
     # Need to be change for our Project
     path('', views.index, name='index'),
     path('help/', views.help, name='help'),
+    path('destination/', views.destination, name='destination'),
 ]
 
 '''
