@@ -27,16 +27,16 @@ def index(request):
  
 
 
-def about(request):
+def help(request):
     '''
     print(request.method)
     print(request.user)
     visitor_cookie_handler(request)
     context_dict = {}
     context_dict['visits'] = request.session['visits']
-    return render(request, 'rango/about.html', context_dict)
+    return render(request, 'rango/help.html', context_dict)
     '''
-    return HttpResponse("Rango says hey there partner from about!")
+    return HttpResponse("Rango says hey there partner from help!")
 
 '''
 def show_category(request, category_name_slug):
