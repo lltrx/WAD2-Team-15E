@@ -39,7 +39,7 @@ def help(request):
     #context_dict['visits'] = request.session['visits']
     
     return render(request, 'rango/help.html', context_dict)
-    return HttpResponse("Rango says hey there partner from help!")
+    #return HttpResponse("Rango says hey there partner from help!")
 
 def destination(request):
     
