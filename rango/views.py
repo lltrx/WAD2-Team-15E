@@ -47,6 +47,9 @@ def destination(request):
     return render(request, 'rango/destination.html', context_dict)
     #return HttpResponse("Rango says here is the destination page!")
 
+def profile(request):
+    return render(request, 'rango/profile.html', {})
+
 '''
 def show_category(request, category_name_slug):
     context_dict = {}
@@ -132,7 +135,7 @@ def register(request):
             print(user_form.errors, profile_form.errors)
     else:
         user_form = UserForm()
-        profile_form = UserProfileForm()
+        profile_form = ç()
     return render(request, 'rango/register.html',
                   context={'user_form': user_form, 'profile_form': profile_form, 'registered': registered})
 

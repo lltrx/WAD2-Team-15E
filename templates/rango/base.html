@@ -18,11 +18,13 @@
         <a href="{% url 'rango:help' %}">Help</a>
         <a href="{% url 'rango:destination' %}">Destination</a>
         {% if user.is_authenticated %}
+          <a href="{% url 'rango:profile' %}">Profile</a>
           <a href="{% url 'rango:logout' %}">Sign out</a>
           <!--<li><a href="">Add New Category</a></li> --> 
         {% else %}
           <a href="{% url 'rango:register' %}">Sign Up</a>
           <a href="{% url 'rango:login' %}">Login</a>
+          
         {% endif %}
       </ul>
     </div>
