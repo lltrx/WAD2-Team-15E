@@ -135,7 +135,7 @@ def register(request):
             print(user_form.errors, profile_form.errors)
     else:
         user_form = UserForm()
-        profile_form = ç()
+        profile_form = ()
     return render(request, 'rango/register.html',
                   context={'user_form': user_form, 'profile_form': profile_form, 'registered': registered})
 
