@@ -1,0 +1,23 @@
+/*
+ Global page styling
+*/
+
+* {
+    box-sizing: border-box;
+    font-size: 12pt;
+    padding: 0px;
+    margin: 0px;
+    color: black;
+}
+
+ul {
+    list-style: disc inside none;
+}
+
+h1 {
+	font-size: 250%;
+}
+
+h3 {
+	font-size: 150%;
+}
