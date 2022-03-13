@@ -1,33 +1,39 @@
 from django import forms
 #from rango.models import Page, Category, UserProfile
-from rango.models import UserProfile
+from rango.models import UserProfile, Destination, Place
 from django.contrib.auth.models import User
 
-'''
-class CategoryForm(forms.ModelForm):
+
+class DestinationForm(forms.ModelForm):
     # Change name of vars and types
     name = forms.CharField(max_length=128,
-                           help_text="Please enter the category name.")
-    views = forms.IntegerField(widget=forms.HiddenInput(), initial=0)
-    likes = forms.IntegerField(widget=forms.HiddenInput(), initial=0)
+                           help_text="Please enter the destination name.")
     slug = forms.CharField(widget=forms.HiddenInput(), required=False)
+    description = forms.CharField(max_length=200, help_text="Please enter the description.")
+    image = forms.ImageField(help_text="Select a destination image.")
+
+    # An inline class to provide additional information on the form.
+    class Meta:
+        # Provide an association between the ModelForm and a model
+        model = Destination
+        fields = ('name', 'description', 'image')
 
     class Meta:
-        model = Category
+        model = Destination
         fields = ('name',)
 
 
-class PageForm(forms.ModelForm):
+class PlaceForm(forms.ModelForm):
     # Change name of var and the type this one is helpful for places
     title = forms.CharField(max_length=128,
-                            help_text="Please enter the title of the page.")
-    url = forms.URLField(max_length=200,
-                         help_text="Please enter the URL of the page.")
-    views = forms.IntegerField(widget=forms.HiddenInput(), initial=0)
+                            help_text="Please enter the title of the place.")
+    address = forms.URLField(max_length=200,
+                         help_text="Please enter the address of the place.")
+
 
     class Meta:
-        model = Page
-        exclude = ('category',)
+        model = Place
+        exclude = ('destination',)
 
     def clean(self):
         cleaned_data = self.cleaned_data
@@ -36,7 +42,7 @@ class PageForm(forms.ModelForm):
             url = f'http://{url}'
             cleaned_data['url'] = url
         return cleaned_data
-'''
+
 
 class UserForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput())
@@ -50,3 +56,4 @@ class UserProfileForm(forms.ModelForm):
     class Meta:
         model = UserProfile
         fields = ('about', 'picture',)
+        

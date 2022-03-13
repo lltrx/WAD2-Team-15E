@@ -9,10 +9,14 @@ urlpatterns = [
     path('', views.index, name='index'),
     path('help/', views.help, name='help'),
     path('destination/', views.destination, name='destination'),
+    path('destination/<slug:destination_name_slug>/', views.show_destination, name='destination'),
+    path('add_destination/', views.add_destination, name='add_destination'),
+    path('destination/<slug:destination_name_slug>/add_place/', views.add_place, name='add_page'),
     path('register/', views.register, name='register'),
     path('login/', views.user_login, name='login'),
     path('logout/', views.user_logout, name='logout'),
     path('profile/', views.profile, name='profile'),
+    
 ]
 
 '''

@@ -2,6 +2,30 @@
     
     {% block title %} Destinations {% endblock %}
     
-    {% block body %}
-    Hi
-    {% endblock%}
+    {% block title_block %}
+    {% if destination %}
+        {{ destination.name }}
+    {% else %}
+        Unknown destination
+    {% endif %}
+{% endblock %}
+
+{% block body_block %}
+    {% if destination %}
+    <h1>{{ destination.name }}</h1>
+    {% if pages %}
+    <ul>
+        {% for place in places %}
+        <li><a href="{{ place.url }}">{{ place.title }}</a></li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <strong>No places currently in destination.</strong>
+    {% endif %}
+    {%if user.is_authenticated %}
+        <a href="{% url 'rango:add_plcae' destination.slug %}">Add place</a> <br />
+    {%endif%}
+    {% else %}
+    The specified destination does not exist.
+    {% endif %}
+{% endblock %}

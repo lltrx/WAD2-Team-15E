@@ -5,7 +5,8 @@ from django.http.response import HttpResponseNotModified
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from datetime import datetime
-from rango.forms import UserForm, UserProfileForm
+from rango.forms import DestinationForm, UserForm, UserProfileForm, PlaceForm
+from rango.models import Destination, UserProfile
 
 #from rango.models import Category, Page
 #from rango.forms import CategoryForm, PageForm, UserForm, UserProfileForm
@@ -28,7 +29,6 @@ def index(request):
     #return HttpResponse("Rango says hey there partner!")
  
 
-
 def help(request):
     '''
     print(request.method)
@@ -50,68 +50,68 @@ def destination(request):
 def profile(request):
     return render(request, 'rango/profile.html', {})
 
-'''
-def show_category(request, category_name_slug):
+
+def show_destination(request, category_name_slug):
     context_dict = {}
 
     try:
-        category = Category.objects.get(slug=category_name_slug)
-        pages = Page.objects.filter(category=category)
-
-        context_dict['pages'] = pages
-        context_dict['category'] = category
-    except Category.DoesNotExist:
-        context_dict['category'] = None
-        context_dict['pages'] = None
+        destination = destination.objects.get(slug=category_name_slug)
+        #pages = Page.objects.filter(category=category)
+        
+        #context_dict['pages'] = pages
+        context_dict['destination'] = destination
+    except Destination.DoesNotExist:
+        context_dict['Destination'] = None
+        #context_dict['pages'] = None
+        return render(request, 'rango/destination.html', context=context_dict)
+'''
     if request.session.test_cookie_worked():
         print("TEST COOKIE WORKED!")
         request.session.delete_test_cookie()
-    return render(request, 'rango/category.html', context=context_dict)
-
+'''
 
 
 @login_required
-def add_category(request):
-    form = CategoryForm()
+def add_destination(request):
+    form = DestinationForm()
     if request.method == 'POST':
-        form = CategoryForm(request.POST)
+        form = DestinationForm(request.POST)
     if form.is_valid():
         form.save(commit=True)
         return redirect(reverse('rango:index'))
     else:
         print(form.errors)
-    return render(request, 'rango/add_category.html', {'form': form})
+    return render(request, 'rango/add_destination.html', {'form': form})
 
 
 @login_required
-def add_page(request, category_name_slug):
+def add_place(request, destination_name_slug):
     try:
-        category = Category.objects.get(slug=category_name_slug)
-    except Category.DoesNotExist:
-        category = None
+        destination = destination.objects.get(slug=destination_name_slug)
+    except destination.DoesNotExist:
+        destination = None
 
-    if category is None:
+    if destination is None:
         return redirect(reverse('rango:index'))
 
-    form = PageForm()
+    form = PlaceForm()
 
     if request.method == 'POST':
-        form = PageForm(request.POST)
+        form = PlaceForm(request.POST)
 
         if form.is_valid():
-            if category:
-                page = form.save(commit=False)
-                page.category = category
-                page.views = 0
-                page.save()
-                return redirect(reverse('rango:show_category',
-                                        kwargs={'category_name_slug':
-                                                category_name_slug}))
+            if destination:
+                place = form.save(commit=False)
+                place.destination = destination
+                place.save()
+                return redirect(reverse('rango:show_destination',
+                                        kwargs={'destination_name_slug':
+                                                destination_name_slug}))
         else:
             print(form.errors)
-    context_dict = {'form': form, 'category': category}
+    context_dict = {'form': form, 'destination': destination}
     return render(request, 'rango/add_page.html', context=context_dict)
-'''
+
 
 def register(request):
     registered = False
@@ -163,8 +163,8 @@ def user_login(request):
 @login_required
 def restricted(request):
     return render(request, 'rango/restricted.html')
-'''
 
+'''
 @login_required
 def user_logout(request):
     logout(request)

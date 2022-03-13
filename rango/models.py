@@ -32,6 +32,18 @@ class Destination(models.Model):
 
     def __str__(self):
         return self.name
+    
+class Place(models.Model):
+    # Change this one to places
+    TITLE_MAX_LENGTH = 128
+    ADDRES_MAX_LENGTH = 200
+    category = models.ForeignKey(Destination, on_delete=models.CASCADE)
+    title = models.CharField(max_length=TITLE_MAX_LENGTH)
+    address = models.URLField()
+
+
+    def __str__(self):
+        return self.title
 
 '''
 class Category(models.Model):

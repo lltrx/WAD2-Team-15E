@@ -2,13 +2,13 @@
 {% load staticfiles %}
 <!-- We can change to add place -->
 {% block title_block %}
-Add a Category
+Add a destination
 {% endblock %}
 
 {% block body_block %}
-<h1>Add a Category</h1>
+<h1>Add a destination</h1>
 <div>
-    <form id="category_form" method="post" action="{% url 'rango:add_category' %}">
+    <form id="destination_form" method="post" action="{% url 'rango:add_destination' %}">
         {% csrf_token %}
         {% for hidden in form.hidden_fields %}
         {{ hidden }}
@@ -18,7 +18,7 @@ Add a Category
         {{ field.help_text }}
         {{ field }}
         {% endfor %}
-        <input type="submit" name="submit" value="Create Category" />
+        <input type="submit" name="submit" value="Create destination" />
     </form>
 </div>
 {% endblock %}
