@@ -23,7 +23,7 @@
     <strong>No places currently in destination.</strong>
     {% endif %}
     {%if user.is_authenticated %}
-        <a href="{% url 'rango:add_plcae' destination.slug %}">Add place</a> <br />
+        <a href="{% url 'rango:add_place' destination.slug %}">Add place</a> <br />
     {%endif%}
     {% else %}
     The specified destination does not exist.

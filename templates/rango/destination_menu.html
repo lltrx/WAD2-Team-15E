@@ -1,0 +1,35 @@
+{% extends 'rango/base.html' %} {% load staticfiles %} 
+
+{% block title_block %}
+Homepage
+{% endblock %} 
+
+{% block body_block %}
+<div>
+  {% if user.is_authenticated %}
+   <h2> Welcome {{ user.username }}, let's explore some interesting destinations in Scotland!</h2> 
+  {% else %}
+    Let's explore some interesting destinations in Scotland!
+  {% endif %}
+</div>
+
+<div>
+  <h2>Most Liked Destinations</h2>
+
+  {% if destinations %}
+  <div id="destination_menu_query">
+    {% for dest in destinations %}
+    <div id="destination">
+      <a href="{% url 'rango:show_destination' dest.slug %}"><h3>{{ dest.name }}</h3></a>
+      <p>{{dest.description}}</p>
+      
+    </div>
+    {% endfor %}
+  </div>
+  {% else %}
+  <strong>There are no destinations present.</strong>
+  {% endif %}
+
+</div>
+
+{% endblock %}

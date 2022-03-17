@@ -10,7 +10,7 @@ class DestinationForm(forms.ModelForm):
                            help_text="Please enter the destination name.")
     slug = forms.CharField(widget=forms.HiddenInput(), required=False)
     description = forms.CharField(max_length=200, help_text="Please enter the description.")
-    image = forms.ImageField(help_text="Select a destination image.")
+    image = forms.ImageField(help_text="Select a destination image.", required=False)
 
     # An inline class to provide additional information on the form.
     class Meta:

@@ -45,24 +45,32 @@ def destination(request):
     
     context_dict = {}
     return render(request, 'rango/destination.html', context_dict)
-    #return HttpResponse("Rango says here is the destination page!")
+
+def destination_menu(request):
+    
+    context_dict = {}
+    all_destinations = Destination.objects.all()
+    context_dict['destinations'] = all_destinations
+    return render(request, 'rango/destination_menu.html', context_dict)
 
 def profile(request):
     return render(request, 'rango/profile.html', {})
 
 
-def show_destination(request, category_name_slug):
+def show_destination(request, destination_name_slug):
     context_dict = {}
 
     try:
-        destination = destination.objects.get(slug=category_name_slug)
+        destination = Destination.objects.get(slug=destination_name_slug)
         #pages = Page.objects.filter(category=category)
         
         #context_dict['pages'] = pages
         context_dict['destination'] = destination
     except Destination.DoesNotExist:
-        context_dict['Destination'] = None
+        context_dict['destination'] = None
         #context_dict['pages'] = None
+        return render(request, 'rango/destination.html', context=context_dict)
+    finally:
         return render(request, 'rango/destination.html', context=context_dict)
 '''
     if request.session.test_cookie_worked():
