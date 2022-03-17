@@ -8,25 +8,31 @@
       Historical places - {% block title_block %} <!--How to Tango with Django! --> {% endblock %}
     </title>
 
-    <link rel="stylesheet" href="{% static 'style/global.css' %}" />
+    <link rel="stylesheet" href="{% static 'style/base.css' %}" />
   </head>
   <body>
-    <div id="global_topbar">
+    <nav class="topbar" id="nav">
       <ul>
+        <li>
         <a href="{% url 'rango:index' %}">Home</a>
         <a href="{% url 'rango:destination_menu' %}">Destinations</a>
         <a href="{% url 'rango:help' %}">Help</a>
         {% if user.is_authenticated %}
           <a href="{% url 'rango:profile' %}">Profile</a>
           <a href="{% url 'rango:logout' %}">Sign Out</a>
-          <li><a href="{% url 'rango:add_destination'%}">Add New Destination</a></li>
+          <a href="{% url 'rango:add_destination'%}">Add New Destination</a>
         {% else %}
           <a href="{% url 'rango:register' %}">Sign Up</a>
           <a href="{% url 'rango:login' %}">Login</a>
         {% endif %}
+        </li>
       </ul>
-    </div>
-
+      <button class="icon" id="toggle">
+        <div class="line line1"></div>
+        <div class="line line2"></div>
+      </button>
+    </nav>
+    <script src={% static "style/topbar.js"%}></script>
     <div>{% block body_block %} {% endblock %}</div>
 
   </body>
