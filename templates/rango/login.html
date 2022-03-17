@@ -4,13 +4,24 @@
 Login
 {% endblock %}
 {% block body_block %}
-<h1>Login to </h1>
+
+
+    <h1>Login to </h1>
 <form id="login_form" method="post" action="{% url 'rango:login' %}">
 {% csrf_token %}
-Username: <input type="text" name="username" value="" size="50" />
+<div class="container">
+<div class="form-control">
+ <input type="text" name="username" required/>
+ <label>Username:</label>
+</div>
+ <br />
+ <div class="form-control">
+<input type="password" name="password" required />
+<label> Password: </label>
 <br />
-Password: <input type="password" name="password" value="" size="50" />
-<br />
-<input type="submit" value="submit" />
+<button class="btn" type="submit">Login</button>
+</div>
 </form>
+</div>
+<script src={% static "style/inputs.js"%}></script>
 {% endblock %}

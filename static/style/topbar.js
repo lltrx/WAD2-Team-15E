@@ -1,4 +1,4 @@
 const toggle = document.getElementById('toggle')
-const div = document.getElementById('div')
+const nav = document.getElementById('nav')
 
-toggle.addEventListener('click', () => div.classList.toggle('active'))
+toggle.addEventListener('click', () => nav.classList.toggle('active'))
