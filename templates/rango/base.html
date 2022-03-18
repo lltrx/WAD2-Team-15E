@@ -9,9 +9,12 @@
     </title>
 
     <link rel="stylesheet" href="{% static 'style/base.css' %}" />
+    <link rel="stylesheet" href="{% static 'style/topbar.css' %}" />
   </head>
   <body>
+    
     <nav class="active" id="nav">
+      <img src="{% static 'images/logo.png' %}" alt="logo" />
       <ul>
         <li>
         <a href="{% url 'rango:index' %}">Home</a>
