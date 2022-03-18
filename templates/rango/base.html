@@ -10,9 +10,13 @@
 
     <link rel="stylesheet" href="{% static 'style/base.css' %}" />
     <link rel="stylesheet" href="{% static 'style/destination.css' %}" />
+    <link rel="stylesheet" href="{% static 'style/topbar.css' %}" />
+
   </head>
   <body>
+    
     <nav class="active" id="nav">
+      <img src="{% static 'images/logo.png' %}" alt="logo" />
       <ul>
         <li>
         <a href="{% url 'rango:index' %}">Home</a>
@@ -33,7 +37,7 @@
         <div class="line line2"></div>
       </button>
     </nav>
-    <script src={% static "style/topbar.js"%}></script>
+    <script src="{% static 'style/topbar.js'}"></script>
     <div>{% block body_block %} {% endblock %}</div>
 
   </body>
