@@ -75,15 +75,4 @@ class Page(models.Model):
 
     def __str__(self):
         return self.title
-
-
-class UserProfile(models.Model):
-    # Keep this and add more to it
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-
-    website = models.URLField(blank=True)
-    picture = models.ImageField(upload_to='profile_images', blank=True)
-
-    def __str__(self):
-        return self.user.username
 '''

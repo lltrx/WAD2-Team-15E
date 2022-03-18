@@ -4,33 +4,46 @@
 {% block title_block %}
 Register
 {% endblock %}
+
 {% block body_block %}
-{% if registered %}
-<h1>Thank you for registering!</h1>
-<a href="{% url 'rango:index' %}">Go to the homepage.</a><br />
-{% else %}
-<h1> Register here! </h1>
-<form method="POST" action="{% url 'rango:register' %}">
-{% csrf_token %}
-<div class="container">
-<div class="form-control">
-<input type="text" name="username" required/> 
-<label>Username:</label> 
-</div>
-<br />
-<div class="form-control">
-<input type="password" name="password" required/> 
-<label>Password:</label> 
-</div>
-<br />
-<div class="form-control">
-<input type="password" name="password_confirm" required/> 
-<label>Password again:</label> 
-<br />
-<button class="btn" type="submit">Register</button>
-</div>
-</div>
-</form>
-{% endif %}
-<script src={% static "style/inputs.js"%}></script>
+	{% if registered %}
+		<h1>Thank you for registering!</h1>
+		<a href="{% url 'rango:index' %}">Go to the homepage.</a><br />
+	{% else %}
+		<h1> Register here! </h1>
+		<form id="user_form" method="POST" action="{% url 'rango:register' %}" enctype="multipart/form-data">
+			{% csrf_token %}
+			<div class="container">
+				<div class="form-control">
+					<input type="text" name="username" required/> 
+					<label>Username:</label> 
+				</div>
+				<br />
+				<div class="form-control">
+					<input type="password" name="password" required/> 
+					<label>Password:</label> 
+				</div>
+					<br />
+				<div class="form-control">
+					<input type="password" name="password_confirm" required/> 
+					<label>Password again:</label> 
+					<br />
+				</div>
+				<div class="form-control">
+					<input type="text" name="about" /> 
+					<label>About you:</label> 
+					<br />
+				</div>
+				<div class="image">
+					<label>Profile picture:</label>
+					<input type="file" name="picture" accept="image/*"/>  
+					<br />
+				</div>
+				<div>
+					<button class="btn" type="submit">Register</button>
+				</div>
+			</div>
+		</form>
+	{% endif %}
+	<script src="{% static 'style/inputs.js'%}"></script>
 {% endblock %}

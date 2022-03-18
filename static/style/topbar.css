@@ -157,3 +157,9 @@ nav {
     color: lightblue;
     transform: translateY(-30px);
   }
+
+  div.image label {
+    color: lightblue;
+    font-size: 18px;
+    text-align: left;
+  }
