@@ -12,7 +12,6 @@ urlpatterns = [
     path('destination_menu/', views.destination_menu, name='destination_menu'),
     path('destination/<slug:destination_name_slug>/', views.show_destination, name='show_destination'),
     path('add_destination/', views.add_destination, name='add_destination'),
-    path('destination/<slug:destination_name_slug>/add_place/', views.add_place, name='add_place'),
     path('register/', views.register, name='register'),
     path('login/', views.user_login, name='login'),
     path('logout/', views.user_logout, name='logout'),

@@ -5,7 +5,7 @@ from django.http.response import HttpResponseNotModified
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from datetime import datetime
-from rango.forms import DestinationForm, UserForm, UserProfileForm, PlaceForm
+from rango.forms import DestinationForm, UserForm, UserProfileForm
 from rango.models import Destination, UserProfile
 
 #from rango.models import Category, Page
@@ -81,17 +81,19 @@ def show_destination(request, destination_name_slug):
 
 @login_required
 def add_destination(request):
-    form = DestinationForm()
+    
     if request.method == 'POST':
-        form = DestinationForm(request.POST)
-    if form.is_valid():
-        form.save(commit=True)
-        return redirect(reverse('rango:index'))
+        form = DestinationForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save(commit=True)
+            return redirect(reverse('rango:index'))
+        else:
+            print(form.errors)
     else:
-        print(form.errors)
+        form = DestinationForm()
     return render(request, 'rango/add_destination.html', {'form': form})
 
-
+'''
 @login_required
 def add_place(request, destination_name_slug):
     try:
@@ -119,7 +121,7 @@ def add_place(request, destination_name_slug):
             print(form.errors)
     context_dict = {'form': form, 'destination': destination}
     return render(request, 'rango/add_page.html', context=context_dict)
-
+'''
 
 def register(request):
     registered = False

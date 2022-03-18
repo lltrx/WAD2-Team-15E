@@ -1,0 +1,11 @@
+#destination-card-query {
+
+}
+
+.destination-card a{
+	text-decoration: none;
+}
+
+.destination-card h3 {
+	color: black;
+}

@@ -6,6 +6,23 @@ Profile
 {% endblock %} 
 
     
-    {% block body_block %}
-    Hi {{user.username}}
-    {% endblock%}
+
+{% block body_block %}
+<div id="user-profile">
+    <h1>Your Profile</h1>
+    <h3>Welcome {{user.username}}!</h3>
+
+    {% if user.picture %}
+        <img src="{{ user.picture.url }}">
+    {% else %}
+        <img src="{% static 'images/user_pic_placeholder.png' %}">
+    {% endif %}
+
+    <h5>About me</h5>
+    {% if user.about %}
+        <p>{{ user.about }}</p>
+    {% else %}
+        <p>This is about me!</p>
+    {% endif %}
+<div>
+{% endblock%}

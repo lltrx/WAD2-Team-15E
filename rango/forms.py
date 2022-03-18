@@ -1,6 +1,6 @@
 from django import forms
 #from rango.models import Page, Category, UserProfile
-from rango.models import UserProfile, Destination, Place
+from rango.models import UserProfile, Destination
 from django.contrib.auth.models import User
 
 
@@ -9,7 +9,7 @@ class DestinationForm(forms.ModelForm):
     name = forms.CharField(max_length=128,
                            help_text="Please enter the destination name.")
     slug = forms.CharField(widget=forms.HiddenInput(), required=False)
-    description = forms.CharField(max_length=200, help_text="Please enter the description.")
+    description = forms.CharField(max_length=300, help_text="Please enter the description.")
     image = forms.ImageField(help_text="Select a destination image.", required=False)
 
     # An inline class to provide additional information on the form.
@@ -18,11 +18,20 @@ class DestinationForm(forms.ModelForm):
         model = Destination
         fields = ('name', 'description', 'image')
 
+class UserForm(forms.ModelForm):
+    password = forms.CharField(widget=forms.PasswordInput())
+
     class Meta:
-        model = Destination
-        fields = ('name',)
+        model = User
+        fields = ('username', 'email', 'password',)
 
 
+class UserProfileForm(forms.ModelForm):
+    class Meta:
+        model = UserProfile
+        fields = ('about', 'picture',)
+
+'''
 class PlaceForm(forms.ModelForm):
     # Change name of var and the type this one is helpful for places
     title = forms.CharField(max_length=128,
@@ -42,18 +51,4 @@ class PlaceForm(forms.ModelForm):
             url = f'http://{url}'
             cleaned_data['url'] = url
         return cleaned_data
-
-
-class UserForm(forms.ModelForm):
-    password = forms.CharField(widget=forms.PasswordInput())
-
-    class Meta:
-        model = User
-        fields = ('username', 'email', 'password',)
-
-
-class UserProfileForm(forms.ModelForm):
-    class Meta:
-        model = UserProfile
-        fields = ('about', 'picture',)
-        
+'''
