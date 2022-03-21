@@ -13,36 +13,8 @@ Register
 		<h1> Register here! </h1>
 		<form id="user_form" method="POST" action="{% url 'rango:register' %}" enctype="multipart/form-data">
 			{% csrf_token %}
-			<div class="container">
-				<div class="form-control">
-					<input type="text" name="username" required/> 
-					<label>Username:</label> 
-				</div>
-				<br />
-				<div class="form-control">
-					<input type="password" name="password" required/> 
-					<label>Password:</label> 
-				</div>
-					<br />
-				<div class="form-control">
-					<input type="password" name="password_confirm" required/> 
-					<label>Password again:</label> 
-					<br />
-				</div>
-				<div class="form-control">
-					<input type="text" name="about" /> 
-					<label>About you:</label> 
-					<br />
-				</div>
-				<div class="image">
-					<label>Profile picture:</label>
-					<input type="file" name="picture" accept="image/*"/>  
-					<br />
-				</div>
-				<div>
-					<button class="btn" type="submit">Register</button>
-				</div>
-			</div>
+			{{ form.as_p }}
+			<button type="submit" class="btn btn-primary">Register</button>
 		</form>
 	{% endif %}
 	<script src="{% static 'style/inputs.js'%}"></script>

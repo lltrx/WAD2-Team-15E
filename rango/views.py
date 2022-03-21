@@ -2,11 +2,13 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.urls import reverse
 from django.http.response import HttpResponseNotModified
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
 from django.contrib.auth.decorators import login_required
 from datetime import datetime
-from rango.forms import DestinationForm, UserForm, UserProfileForm
+from rango.forms import DestinationForm, UserForm, UserProfileForm, RegistrationForm, EditProfileForm
 from rango.models import Destination, UserProfile
+from django.contrib.auth.forms import UserChangeForm, UserCreationForm, PasswordChangeForm
+
 
 #from rango.models import Category, Page
 #from rango.forms import CategoryForm, PageForm, UserForm, UserProfileForm
@@ -14,11 +16,7 @@ from rango.models import Destination, UserProfile
 # Change name of vars and methods amd add more helpul views to our Project
 
 def index(request):
-    '''
-    category_list = Category.objects.order_by('-likes')[:5]
-    page_list = Page.objects.order_by('-views')[:5]
-    '''
-    
+
     context_dict = {}
     context_dict['boldmessage'] = 'Crunchy, creamy, cookie, candy, cupcake!'
     #context_dict['categories'] = category_list
@@ -56,7 +54,32 @@ def destination_menu(request):
 def profile(request):
     return render(request, 'rango/profile.html', {})
 
-
+def edit_profile(request):
+    if request.method == 'POST':
+        form = EditProfileForm(request.POST, instance=request.user)
+        
+        if form.is_valid():
+            form.save()
+            update_session_auth_hash(request, form.user)
+            return redirect(reverse('rango:profile'))
+        
+    else:
+        form = EditProfileForm(instance=request.user)
+        context_dict = {'form': form}
+        return render(request, 'rango/edit_profile.html', context=context_dict)
+    
+def change_password(request):
+    if request.method == 'POST':
+        form = PasswordChangeForm(data=request.POST, user=request.user)
+        if form.is_valid():
+            form.save()
+            return redirect(reverse('rango:profile'))
+    else:
+        form = PasswordChangeForm(user=request.user)
+            
+        context_dict = {'form': form}
+        return render(request, 'rango/change_password.html', context=context_dict)
+        
 def show_destination(request, destination_name_slug):
     context_dict = {}
 
@@ -93,64 +116,21 @@ def add_destination(request):
         form = DestinationForm()
     return render(request, 'rango/add_destination.html', {'form': form})
 
-'''
-@login_required
-def add_place(request, destination_name_slug):
-    try:
-        destination = destination.objects.get(slug=destination_name_slug)
-    except destination.DoesNotExist:
-        destination = None
 
-    if destination is None:
-        return redirect(reverse('rango:index'))
-
-    form = PlaceForm()
-
-    if request.method == 'POST':
-        form = PlaceForm(request.POST)
-
-        if form.is_valid():
-            if destination:
-                place = form.save(commit=False)
-                place.destination = destination
-                place.save()
-                return redirect(reverse('rango:show_destination',
-                                        kwargs={'destination_name_slug':
-                                                destination_name_slug}))
-        else:
-            print(form.errors)
-    context_dict = {'form': form, 'destination': destination}
-    return render(request, 'rango/add_page.html', context=context_dict)
-'''
 
 def register(request):
-    registered = False
     if request.method == 'POST':
-
-        user_form = UserForm(request.POST)
-        profile_form = UserProfileForm(request.POST)
-
-        if user_form.is_valid() and profile_form.is_valid():
-            user = user_form.save()
-            user.set_password(user.password)
-            user.save()
-            profile = profile_form.save(commit=False)
-            profile.user = user
-            
-            if 'picture' in request.FILES:
-                profile.picture = request.FILES['picture']
-
-            profile.save()
-            registered = True
+        form = RegistrationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect(reverse('rango:login'))
         else:
-            print(user_form.errors, profile_form.errors)
+            print(form.errors)
     else:
-        user_form = UserForm()
-        profile_form = UserProfileForm()
-
-    return render(request, 'rango/register.html',
-                  context={'user_form': user_form, 'profile_form': profile_form, 'registered': registered})
-
+        form = RegistrationForm()
+        
+        context_dict = {'form': form}
+        return render(request, 'rango/register.html', context=context_dict)
 
 def user_login(request):
     if request.method == 'POST':

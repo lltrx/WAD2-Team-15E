@@ -2,6 +2,7 @@ from django import forms
 #from rango.models import Page, Category, UserProfile
 from rango.models import UserProfile, Destination
 from django.contrib.auth.models import User
+from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 
 
 class DestinationForm(forms.ModelForm):
@@ -30,25 +31,36 @@ class UserProfileForm(forms.ModelForm):
     class Meta:
         model = UserProfile
         fields = ('about', 'picture',)
-
-'''
-class PlaceForm(forms.ModelForm):
-    # Change name of var and the type this one is helpful for places
-    title = forms.CharField(max_length=128,
-                            help_text="Please enter the title of the place.")
-    address = forms.URLField(max_length=200,
-                         help_text="Please enter the address of the place.")
-
+        
+class RegistrationForm(UserCreationForm):
+    email = forms.EmailField(required=True)
 
     class Meta:
-        model = Place
-        exclude = ('destination',)
+        model = User
+        fields = (
+            "username",
+            "first_name",
+            "last_name",
+            "email",
+            "password1",
+            "password2")
 
-    def clean(self):
-        cleaned_data = self.cleaned_data
-        url = cleaned_data.get('url')
-        if url and not url.startswith('http://'):
-            url = f'http://{url}'
-            cleaned_data['url'] = url
-        return cleaned_data
-'''
+    def save(self, commit=True):
+        user = super(RegistrationForm, self).save(commit=False)
+        user.first_name = self.cleaned_data["first_name"]
+        user.last_name = self.cleaned_data["last_name"]
+        user.email = self.cleaned_data["email"]
+        if commit:
+            user.save()
+
+        return user
+
+class EditProfileForm(UserChangeForm):
+    class Meta:
+        model = User
+        fields = (
+            "email",
+            "first_name",
+            "last_name",
+           "username",
+           "password")
