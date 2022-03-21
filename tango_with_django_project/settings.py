@@ -126,7 +126,7 @@ STATIC_URL = '/static/'
 MEDIA_ROOT = MEDIA_DIR
 MEDIA_URL = '/media/'
 
-LOGIN_URL = 'rango:login'
+LOGIN_URL = 'destination:login'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
@@ -138,7 +138,7 @@ REGISTRATION_OPEN = True
 
 REGISTRATION_AUTO_LOGIN = True
 
-LOGIN_REDIRECT_URL = 'rango:index'
+LOGIN_REDIRECT_URL = 'destination:index'
 
 LOGIN_URL = 'auth_login'
 
