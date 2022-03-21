@@ -1,4 +1,4 @@
-{% extends 'rango/base.html' %}
+{% extends 'destination/base.html' %}
 {% load staticfiles %}
 {% block title_block %}
 Login
@@ -7,7 +7,7 @@ Login
 
 
     <h1>Login to </h1>
-<form id="login_form" method="post" action="{% url 'rango:login' %}">
+<form id="login_form" method="post" action="{% url 'destination:login' %}">
 {% csrf_token %}
 <div class="container">
 <div class="form-control">

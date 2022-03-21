@@ -1,4 +1,4 @@
-{% extends 'rango/base.html' %} {% load staticfiles %} 
+{% extends 'destination/base.html' %} {% load staticfiles %} 
 
 
 {% block title_block %}
@@ -12,6 +12,7 @@ Profile
     <form method="post">
         {% csrf_token %}
         {{form.as_p}}
+        <a href="{% url 'destination:change_password' %}">Change Password</a>
         <button type="submit" class="btn btn-primary">Save</button>
     </form>
 <div>

@@ -1,4 +1,4 @@
-{% extends 'rango/base.html' %} {% load staticfiles %} 
+{% extends 'destination/base.html' %} {% load staticfiles %} 
 
 
 {% block title_block %}
@@ -9,18 +9,18 @@ Profile
 
 {% block body_block %}
 <div id="user-profile">
-    <a href="{% url 'rango:edit_profile' %}">Edit Profile</a>
+    <a href="{% url 'destination:edit_profile' %}">Edit Profile</a>
     <h1>Your Profile</h1>
     <h3>Welcome {{user.username}}!</h3>
 
 
-      {% if user.picture %}
-        <img src="{{ user.picture.url }}">
+      {% if user.userprofile.picture %}
+        <img src="{{ user.userprofile.picture.url }}">
     {% else %}
         <img src="{% static 'images/user_pic_placeholder.png' %}">
     {% endif %}
 
-    <h5>About me</h5>
+    <h5>About me</h5> 
     {% if user.about %}
         <p>{{ user.about }}</p>
     {% else %}
