@@ -21,7 +21,7 @@ Homepage
     <div id="destination-card-query">
       {% for dest in destinations %}
       <div class="destination-card">
-        <a href="{% url 'rango:show_destination' dest.slug %}"><h3>{{ dest.name }}</h3></a>
+        <a href="{% url 'destination:show_destination' dest.slug %}"><h3>{{ dest.name }}</h3></a>
         <p>{{ dest.description }}</p>
         {% if dest.image %}
           <img src="{{ dest.image.url }}">

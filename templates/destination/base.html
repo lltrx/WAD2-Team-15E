@@ -11,12 +11,12 @@
     <link rel="stylesheet" href="{% static 'style/base.css' %}" />
     <link rel="stylesheet" href="{% static 'style/destination.css' %}" />
     <link rel="stylesheet" href="{% static 'style/topbar.css' %}" />
-
+    
   </head>
   <body>
     
     <nav class="active" id="nav">
-      <img src="{% static 'images/logo.png' %}" alt="logo" />
+     
       <ul>
         <li>
         <a href="{% url 'destination:index' %}">Home</a>
@@ -30,14 +30,20 @@
           <a href="{% url 'destination:register' %}">Sign Up</a>
           <a href="{% url 'destination:login' %}">Login</a>
         {% endif %}
+        <!-- If the user is login and in the profile show edit profile if else not-->
+        {% if user.is_authenticated %}
+          <a href="{% url 'destination:edit_profile' %}">Edit Profile</a>
+        {% endif %}
         </li>
       </ul>
       <button class="icon" id="toggle">
         <div class="line line1"></div>
         <div class="line line2"></div>
       </button>
-    </nav>
-    <script src="{% static 'style/topbar.js'}"></script>
+    
+    <script src="{% static 'style/topbar.js' %}"></script>
+  </nav>
+  <img src="{% static 'images/logo2.png' %}" alt="logo" />
     <div>{% block body_block %} {% endblock %}</div>
 
   </body>

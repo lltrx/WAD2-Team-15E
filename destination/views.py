@@ -106,8 +106,6 @@ def register(request):
         if form.is_valid():
             form.save()
             return redirect(reverse('destination:login'))
-        else:
-            print(form.errors)
     else:
         form = RegistrationForm()
         

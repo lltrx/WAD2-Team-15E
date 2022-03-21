@@ -1,5 +1,5 @@
 nav {
-    background-color: #211d1cff;
+    background-color: #A0522D;
     height: 50px;
     width: 50px;
     display: flex;
@@ -43,7 +43,7 @@ nav {
   }
   
   .icon {
-    background-color: #333;
+    background-color: #A0522D;
     border: 0;
     padding: 0;
     position: relative;
@@ -74,7 +74,7 @@ nav {
     transform: rotate(765deg) translateY(-5.5px);
   }
   .container {
-    background-color: #845420;
+    background-color: #A0522D;
     padding: 20px 40px;
     border-radius: 5px;
     margin:auto;
@@ -88,14 +88,14 @@ nav {
   
   .container a {
     text-decoration: none;
-    color: lightblue;
+    color: 333;
   }
   
   .btn {
     cursor: pointer;
     display: inline-block;
     width: 100%;
-    background: #e79214;
+    background: #A0522D;
     padding: 15px;
     font-family: inherit;
     font-size: 16px;
