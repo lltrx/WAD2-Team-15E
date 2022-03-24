@@ -41,7 +41,10 @@ def destination_menu(request):
     return render(request, 'destination/destination_menu.html', context_dict)
 
 def profile(request):
-    return render(request, 'destination/profile.html', {})
+    context_dict = {}
+    user_destinations = Destination.objects.filter(author=request.user)
+    context_dict['user_destinations'] = user_destinations
+    return render(request, 'destination/profile.html', context_dict)
 
 def edit_profile(request):
     if request.method == 'POST':
@@ -89,7 +92,7 @@ def add_destination(request):
     if request.method == 'POST':
         form = DestinationForm(request.POST, request.FILES)
         if form.is_valid():
-            form.save(commit=True)
+            form.save(request, commit=True)
             return redirect(reverse('destination:index'))
         else:
             print(form.errors)
@@ -131,12 +134,6 @@ def user_login(request):
         return render(request, 'destination/login.html')
 
 
-'''
-@login_required
-def restricted(request):
-    return render(request, 'destination/restricted.html')
-
-'''
 @login_required
 def user_logout(request):
     logout(request)

@@ -1,5 +1,5 @@
-{% extends 'destination/base.html' %}
-{% load staticfiles %}
+{% extends 'destination/base.html' %}{% load staticfiles %}
+
 {% block title_block %}
 Add a destination
 {% endblock %}
@@ -13,6 +13,14 @@ Add a destination
             <label for="title">title</label>
             <br />
             <input type="text" name="name" id="name" required>
+            <br />
+            <label for="destination_type">type</label>
+            <br />
+            <select name="{{ form.destination_type.html_name }}" value="{{ form.destination_type.value }}" id="{{ form.destination_type.id_for_label }}">
+                {% for widget in form.destination_type.subwidgets %}
+                    {{ widget }}
+                {% endfor %}
+            </select>
             <br />
             <label for="description">description</label>
             <br />

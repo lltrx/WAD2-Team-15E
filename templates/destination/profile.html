@@ -14,7 +14,7 @@ Profile
     <h3>Welcome {{user.username}}!</h3>
 
 
-      {% if user.userprofile.picture %}
+    {% if user.userprofile.picture %}
         <img src="{{ user.userprofile.picture.url }}">
     {% else %}
         <img src="{% static 'images/user_pic_placeholder.png' %}">
@@ -26,5 +26,21 @@ Profile
     {% else %}
         <p>This is about me!</p>
     {% endif %}
+
+    {% if user_destinations %}
+       <h5>User's destinations</h5>
+       <div id="destination-card-query">
+           {% for dest in user_destinations %}
+              <div class="destination-card">
+                <a href="{% url 'destination:show_destination' dest.slug %}"><h3>{{ dest.name }}</h3></a>
+                <p>{{ dest.description }}</p>
+                {% if dest.image %}
+                  <img src="{{ dest.image.url }}">
+                {% endif %}
+              </div>
+            {% endfor %}
+       </div>
+    {% endif %}
+
 <div>
 {% endblock%}
