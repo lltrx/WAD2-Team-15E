@@ -21,19 +21,19 @@
         <li>
         <a href="{% url 'destination:index' %}">Home</a>
         <a href="{% url 'destination:destination_menu' %}">Destinations</a>
-        <a href="{% url 'destination:help' %}">Help</a>
         {% if user.is_authenticated %}
+          <a href="{% url 'destination:add_destination'%}">Add New Destination</a>
           <a href="{% url 'destination:profile' %}">Profile</a>
           <a href="{% url 'destination:logout' %}">Sign Out</a>
-          <a href="{% url 'destination:add_destination'%}">Add New Destination</a>
         {% else %}
           <a href="{% url 'destination:register' %}">Sign Up</a>
           <a href="{% url 'destination:login' %}">Login</a>
         {% endif %}
-        <!-- If the user is login and in the profile show edit profile if else not-->
+        <a href="{% url 'destination:help' %}">Help</a>
+        <!-- If the user is login and in the profile show edit profile if else not
         {% if user.is_authenticated %}
           <a href="{% url 'destination:edit_profile' %}">Edit Profile</a>
-        {% endif %}
+        {% endif %}-->
         </li>
       </ul>
       <button class="icon" id="toggle">

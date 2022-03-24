@@ -13,8 +13,13 @@
 {% block body_block %}
     {% if destination %}
     <h1>{{ destination.name }}</h1>
+
+    {% if destination.image %}
+      <img src="{{ destination.image.url }}">
+    {% endif %}
     <p>{{ destination.description }}</p>
     <a href="{% url 'destination:profile' %}">view the user's profile</a>
+
 
     {%if user.is_authenticated %}
         
