@@ -35,12 +35,14 @@ def destination_menu(request):
     context_dict['destinations'] = all_destinations
     return render(request, 'destination/destination_menu.html', context_dict)
 
+@login_required
 def my_profile(request):
     context_dict = {}
     user_destinations = Destination.objects.filter(author=request.user)
     context_dict['user_destinations'] = user_destinations
     return render(request, 'destination/profile.html', context_dict)
 
+@login_required
 def edit_profile(request):
     if request.method == 'POST':
         form = EditProfileForm(request.POST, instance=request.user)
@@ -52,8 +54,9 @@ def edit_profile(request):
     else:
         form = EditProfileForm(instance=request.user)
         context_dict = {'form': form}
-        return render(request, 'destination/edit_profile.html', context=context_dict)
+        return render(request, 'destination/edit_profile.html', context_dict)
     
+
 def user_profile(request, username):
     context_dict = {}
     user = User.objects.get(username=username)
@@ -62,6 +65,7 @@ def user_profile(request, username):
     context_dict['user_destinations'] = user_destinations
     return render(request, 'destination/user_profile.html', context_dict)
 
+@login_required
 def change_password(request):
     if request.method == 'POST':
         form = PasswordChangeForm(data=request.POST, user=request.user)
@@ -103,7 +107,18 @@ def add_destination(request):
         form = DestinationForm()
     return render(request, 'destination/add_destination.html', {'form': form})
 
-
+def edit_destination(request):
+    if request.method == 'POST':
+        form = EditProfileForm(request.POST, instance=request.user)
+        
+        if form.is_valid():
+            form.save()
+            return redirect(reverse('destination:profile'))
+        
+    else:
+        form = EditProfileForm(instance=request.user)
+        context_dict = {'form': form}
+        return render(request, 'destination/edit_profile.html', context=context_dict)
 
 def register(request):
     if request.method == 'POST':
