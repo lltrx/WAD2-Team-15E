@@ -25,9 +25,8 @@ class Destination(models.Model):
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, blank=True, null=True)
     
 
-    def save(self, request, *args, **kwargs):
+    def save(self, *args, **kwargs):
         self.slug = slugify(self.name)
-        self.author = request.user
         super(Destination, self).save(*args, **kwargs)
 
     class Meta:

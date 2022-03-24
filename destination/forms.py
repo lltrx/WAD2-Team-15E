@@ -20,6 +20,16 @@ class DestinationForm(forms.ModelForm):
         model = Destination
         fields = ('name', 'destination_type', 'description', 'image')
 
+    def save(self, request, commit=True):
+        destination = super(DestinationForm, self).save(commit=False)
+        destination.name = self.cleaned_data["name"]
+        destination.destination_type = self.cleaned_data["destination_type"]
+        destination.description = self.cleaned_data["description"]
+        destination.image = self.cleaned_data["image"]
+        destination.author = request.user
+        if commit:
+            destination.save()
+        return destination
 
 class RegistrationForm(UserCreationForm):
     email = forms.EmailField(required=True)
@@ -42,7 +52,6 @@ class RegistrationForm(UserCreationForm):
         user.email = self.cleaned_data["email"]
         if commit:
             user.save()
-
         return user
 
 class EditProfileForm(UserChangeForm):
