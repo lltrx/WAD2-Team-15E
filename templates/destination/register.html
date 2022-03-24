@@ -12,41 +12,11 @@ Register
 	{% else %}
 		<h1> Register here! </h1>
 		<form id="user_form" method="POST" action="{% url 'destination:register' %}" enctype="multipart/form-data">
-			
 			{% csrf_token %}
-			<div class="container">
-				<div class="form-control">
-			 {{ form.username }}
-			 {{form.username.errors}}
-			<label for="username">Username:</label>
-				</div>
-			<br />
-			<div class="form-control">
-			{{ form.first_name }}
-			<label for="fist_name">First Name:</label>
-				</div>
-			<br />
-			<div class="form-control">
-			{{ form.last_name }}
-			<label for="last_name">Last Name:</label>
-				</div>
-			<br />
-			<div class="form-control">
-			{{ form.email }}
-			<label for="email">Email:</label>
-				</div>
-			<br />
-			<div class="form-control">
-			{{ form.password1 }}
-			<label for="password">Password:</label>
-				</div>
-			<br />
-			<div class="form-control">
-			{{ form.password2 }}
-			<label for="password_confirm">Confirm Password:</label>
-			<br />
-			<button type="submit" class="btn btn-primary">Register</button>
-			</div>
+			<div class="container">					
+				{{ user_form.as_p }}
+				{{ user_profile_form.as_p }}
+				<button type="submit" class="btn btn-primary">Register</button>
 		</form>
 	</div>
 	{% endif %}

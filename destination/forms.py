@@ -54,6 +54,21 @@ class RegistrationForm(UserCreationForm):
             user.save()
         return user
 
+class UserProfileForm(forms.ModelForm):
+    class Meta:
+        model = UserProfile
+        fields = (
+            "picture",
+            "about"
+            )
+class UserProfileChangeForm(forms.ModelForm):
+    class Meta:
+        model = UserProfile
+        fields = (
+            "picture",
+            "about"
+            )
+        
 class EditProfileForm(UserChangeForm):
     class Meta:
         model = User

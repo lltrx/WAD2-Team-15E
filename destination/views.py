@@ -5,7 +5,7 @@ from django.http.response import HttpResponseNotModified
 from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
 from django.contrib.auth.decorators import login_required
 from datetime import datetime
-from destination.forms import DestinationForm, RegistrationForm, EditProfileForm
+from destination.forms import DestinationForm, RegistrationForm, EditProfileForm, UserProfileForm, UserProfileChangeForm
 from destination.models import Destination, UserProfile
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserChangeForm, UserCreationForm, PasswordChangeForm
@@ -44,18 +44,28 @@ def my_profile(request):
 
 @login_required
 def edit_profile(request):
+    edited = False
     if request.method == 'POST':
-        form = EditProfileForm(request.POST, instance=request.user)
+        user_form = EditProfileForm(request.POST, instance=request.user)
+        user_profile_form = UserProfileForm(request.POST, instance=request.user.userprofile)
         
-        if form.is_valid():
-            form.save()
-            return redirect(reverse('destination:profile'))
-        
+        if user_form.is_valid() and user_profile_form.is_valid():
+            user = user_form.save()
+            user.save()
+            profile = user_profile_form.save(commit=False)
+            profile.user = user
+            if 'profile_pic' in request.FILES:
+                profile.profile_pic = request.FILES['profile_pic']
+            
+            profile.save()
+            edited = True
+        else:
+            print(user_form.errors, user_profile_form.errors)
+                    
     else:
-        form = EditProfileForm(instance=request.user)
-        context_dict = {'form': form}
-        return render(request, 'destination/edit_profile.html', context_dict)
-    
+        user_form = EditProfileForm(instance=request.user)
+        user_profile_form = UserProfileChangeForm(instance=request.user.userprofile)
+    return render(request, 'destination/edit_profile.html', {'user_form': user_form, 'user_profile_form': user_profile_form, 'edited': edited})
 
 def user_profile(request, username):
     context_dict = {}
@@ -121,17 +131,32 @@ def edit_destination(request):
         return render(request, 'destination/edit_profile.html', context=context_dict)
 
 def register(request):
+    registered = False
     if request.method == 'POST':
-        form = RegistrationForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect(reverse('destination:login'))
-    else:
-        form = RegistrationForm()
+        user_form = RegistrationForm(request.POST)
+        user_profile_form = UserProfileForm(request.POST)
         
-        context_dict = {'form': form}
-        return render(request, 'destination/register.html', context=context_dict)
-
+        if user_form.is_valid() and user_profile_form.is_valid():
+            user = user_form.save()
+            user.set_password(user.password)
+            user = user_form.save()
+            profile = user_profile_form.save(commit=False)
+            profile.user = user
+            if 'profile_pic' in request.FILES:
+                profile.profile_pic = request.FILES['profile_pic']
+                
+            profile.save()
+            registered = True
+            
+            return redirect(reverse('destination:login'))
+        
+            
+        else:
+            print(user_form.errors, user_profile_form.errors)
+    else:
+        user_form = RegistrationForm()
+        user_profile_form = UserProfileForm()
+    return render(request, 'destination/register.html', {'user_form': user_form, 'user_profile_form': user_profile_form, 'registered': registered})
 
 def user_login(request):
     if request.method == 'POST':

@@ -23,12 +23,11 @@ Your profile
     {% endif %}
 
     <h5>About me</h5> 
-    {% if user.about %}
-        <p>{{ user.about }}</p>
+    {% if user_profile_from.about %}
+        <p>{{ user_profile_from.about }}</p>
     {% else %}
         <p>This is about me!</p>
     {% endif %}
-
     {% if user_destinations %}
        <h5>User's destinations</h5>
        <div id="destination-card-query">
@@ -36,9 +35,7 @@ Your profile
               <div class="destination-card">
                 <a href="{% url 'destination:show_destination' dest.slug %}"><h3>{{ dest.name }}</h3></a>
                 <p>{{ dest.description }}</p>
-                {% if dest.image %}
-                  <img src="{{ dest.image.url }}">
-                {% endif %}
+
               </div>
             {% endfor %}
        </div>
