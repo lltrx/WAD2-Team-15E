@@ -7,6 +7,7 @@ from django.contrib.auth.decorators import login_required
 from datetime import datetime
 from destination.forms import DestinationForm, RegistrationForm, EditProfileForm
 from destination.models import Destination, UserProfile
+from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserChangeForm, UserCreationForm, PasswordChangeForm
 
 
@@ -27,12 +28,6 @@ def help(request):
     
     return render(request, 'destination/help.html', context_dict)
 
-
-def destination(request):
-    
-    context_dict = {}
-    return render(request, 'destination/destination.html', context_dict)
-
 def destination_menu(request):
     
     context_dict = {}
@@ -40,7 +35,7 @@ def destination_menu(request):
     context_dict['destinations'] = all_destinations
     return render(request, 'destination/destination_menu.html', context_dict)
 
-def profile(request):
+def my_profile(request):
     context_dict = {}
     user_destinations = Destination.objects.filter(author=request.user)
     context_dict['user_destinations'] = user_destinations
@@ -59,6 +54,14 @@ def edit_profile(request):
         context_dict = {'form': form}
         return render(request, 'destination/edit_profile.html', context=context_dict)
     
+def user_profile(request, username):
+    context_dict = {}
+    user = User.objects.get(username=username)
+    user_destinations = Destination.objects.filter(author=user)
+    context_dict['target_user'] = user
+    context_dict['user_destinations'] = user_destinations
+    return render(request, 'destination/user_profile.html', context_dict)
+
 def change_password(request):
     if request.method == 'POST':
         form = PasswordChangeForm(data=request.POST, user=request.user)

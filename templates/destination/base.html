@@ -23,7 +23,7 @@
         <a href="{% url 'destination:destination_menu' %}">Destinations</a>
         {% if user.is_authenticated %}
           <a href="{% url 'destination:add_destination'%}">Add New Destination</a>
-          <a href="{% url 'destination:profile' %}">Profile</a>
+          <a href="{% url 'destination:my_profile' %}">Profile</a>
           <a href="{% url 'destination:logout' %}">Sign Out</a>
         {% else %}
           <a href="{% url 'destination:register' %}">Sign Up</a>

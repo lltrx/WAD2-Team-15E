@@ -18,8 +18,10 @@
       <img src="{{ destination.image.url }}">
     {% endif %}
     <p>{{ destination.description }}</p>
-    <a href="{% url 'destination:profile' %}">view the user's profile</a>
 
+    {% if destination.author != null %}
+        <a href="{% url 'destination:user_profile' destination.author %}">view the author's profile</a>
+    {% endif %}
 
     {%if user.is_authenticated %}
         

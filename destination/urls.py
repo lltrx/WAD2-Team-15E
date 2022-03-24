@@ -7,14 +7,14 @@ app_name = 'destination'
 urlpatterns = [
     path('', views.index, name='index'),
     path('help/', views.help, name='help'),
-    path('destination/', views.destination, name='destination'),
     path('destination_menu/', views.destination_menu, name='destination_menu'),
     path('destination/<slug:destination_name_slug>/', views.show_destination, name='show_destination'),
     path('add_destination/', views.add_destination, name='add_destination'),
     path('register/', views.register, name='register'),
     path('login/', views.user_login, name='login'),
     path('logout/', views.user_logout, name='logout'),
-    path('profile/', views.profile, name='profile'),
+    path('profile/', views.my_profile, name='my_profile'),
+    path('profile/<slug:username>/', views.user_profile, name='user_profile'),
     path('profile/edit/', views.edit_profile, name='edit_profile'),
     path('change_password/', views.change_password, name='change_password'),
     
