@@ -1,8 +1,7 @@
 from django.db import models
-
-# Create your models here.
 from django.template.defaultfilters import slugify
 from django.contrib.auth.models import User
+from django.conf import settings
 
 TEXT_MAX_LENGTH = 300
 NAME_MAX_LENGTH = 100
@@ -15,15 +14,20 @@ class UserProfile(models.Model):
     def __str__(self):
         return self.user.username
 
+DESTINATION_TYPES = [('H', 'History'), ('S', 'Sport'), ('R', 'Relax'), ('O', 'Other')]
 
 class Destination(models.Model):
     name = models.CharField(max_length=NAME_MAX_LENGTH, unique=True)
     slug = models.SlugField(unique=True)
     description = models.CharField(max_length=TEXT_MAX_LENGTH, blank=True)
     image = models.ImageField(upload_to='destination_images', blank=True)
+    destination_type = models.CharField(max_length=1, choices=DESTINATION_TYPES, default='O')
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, blank=True, null=True)
+    
 
-    def save(self, *args, **kwargs):
+    def save(self, request, *args, **kwargs):
         self.slug = slugify(self.name)
+        self.author = request.user
         super(Destination, self).save(*args, **kwargs)
 
     class Meta:

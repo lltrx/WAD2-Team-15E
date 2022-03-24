@@ -3,11 +3,13 @@ from destination.models import UserProfile, Destination
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 
+DESTINATION_TYPES = [('H', 'History'), ('S', 'Sport'), ('R', 'Relax'), ('O', 'Other')]
 
 class DestinationForm(forms.ModelForm):
     # Change name of vars and types
     name = forms.CharField(max_length=128,
                            help_text="Please enter the destination name.")
+    destination_type = forms.ChoiceField(choices=DESTINATION_TYPES)
     slug = forms.CharField(widget=forms.HiddenInput(), required=False)
     description = forms.CharField(max_length=300, help_text="Please enter the description.")
     image = forms.ImageField(help_text="Select a destination image.", required=False)
@@ -16,7 +18,7 @@ class DestinationForm(forms.ModelForm):
     class Meta:
         # Provide an association between the ModelForm and a model
         model = Destination
-        fields = ('name', 'description', 'image')
+        fields = ('name', 'destination_type', 'description', 'image')
 
 
 class RegistrationForm(UserCreationForm):
@@ -50,5 +52,5 @@ class EditProfileForm(UserChangeForm):
             "email",
             "first_name",
             "last_name",
-           "username",
-           "password")
+            "username",
+            "password")
