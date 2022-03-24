@@ -49,7 +49,6 @@ def edit_profile(request):
         
         if form.is_valid():
             form.save()
-            update_session_auth_hash(request, form.user)
             return redirect(reverse('destination:profile'))
         
     else:
