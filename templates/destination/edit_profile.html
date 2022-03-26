@@ -9,7 +9,7 @@ Profile
 
 {% block body_block %}
 <div id="user-profile">
-    <form method="post">
+    <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
         <div class="container">					
             {{ user_form.as_p }}
