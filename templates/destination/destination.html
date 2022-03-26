@@ -14,9 +14,15 @@
     {% if destination %}
     <h1>{{ destination.name }}</h1>
 
+    {% if destination.author == request.user %}
+        <a href="{% url 'destination:edit_destination' destination.slug %}">Edit Destination</a><br />
+    {% endif %} 
+
     {% if destination.image %}
       <img src="{{ destination.image.url }}">
     {% endif %}
+    <p>Type: {{ destination.get_destination_type_display }}</p>
+
     <p>{{ destination.description }}</p>
 
     {% if destination.author != null %}

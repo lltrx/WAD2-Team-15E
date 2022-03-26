@@ -31,6 +31,7 @@ class DestinationForm(forms.ModelForm):
             destination.save()
         return destination
 
+
 class RegistrationForm(UserCreationForm):
     email = forms.EmailField(required=True)
 

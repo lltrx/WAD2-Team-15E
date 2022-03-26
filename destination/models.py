@@ -33,5 +33,5 @@ class Destination(models.Model):
         verbose_name_plural = 'Destinations'
 
     def __str__(self):
-        return self.name
+        return self.slug
     

@@ -107,18 +107,25 @@ def add_destination(request):
         form = DestinationForm()
     return render(request, 'destination/add_destination.html', {'form': form})
 
-def edit_destination(request):
+@login_required
+def edit_destination(request, destination_name_slug):
+    context_dict = {}
+
+    destination = Destination.objects.get(slug=destination_name_slug)
+    context_dict['instance'] = destination
     if request.method == 'POST':
-        form = EditProfileForm(request.POST, instance=request.user)
+        form = DestinationForm(request.POST, request.FILES, instance=destination)
+        #form = EditProfileForm(request.POST, instance=request.user)
         
         if form.is_valid():
-            form.save()
-            return redirect(reverse('destination:profile'))
+            form.save(request)
+            return redirect(reverse('destination:show_destination', kwargs={'destination_name_slug':destination_name_slug}))
         
     else:
-        form = EditProfileForm(instance=request.user)
-        context_dict = {'form': form}
-        return render(request, 'destination/edit_profile.html', context=context_dict)
+        form = DestinationForm(request.FILES, instance=destination)
+        context_dict['form'] = form
+        print("hey")
+        return render(request, 'destination/edit_destination.html', context=context_dict)
 
 def register(request):
     if request.method == 'POST':

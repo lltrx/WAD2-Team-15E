@@ -9,6 +9,7 @@ urlpatterns = [
     path('help/', views.help, name='help'),
     path('destination_menu/', views.destination_menu, name='destination_menu'),
     path('destination/<slug:destination_name_slug>/', views.show_destination, name='show_destination'),
+    path('destination/<slug:destination_name_slug>/edit/', views.edit_destination, name='edit_destination'),
     path('add_destination/', views.add_destination, name='add_destination'),
     path('register/', views.register, name='register'),
     path('login/', views.user_login, name='login'),
