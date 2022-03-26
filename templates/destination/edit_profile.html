@@ -11,9 +11,39 @@ Profile
 <div id="user-profile">
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
-        <div class="container">					
-            {{ user_form.as_p }}
-            {{ user_profile_form.as_p }}
+        <div class="container">									
+				<div class="form-control">
+					<input type="text" name="username" required="" id="id_username" {{ user_form.username}}
+					<label for="username">Username</label>
+				</div>
+				<br />
+				<div class="form-control">
+					<input type="text" name="first_name" id="id_first_name" {{ user_form.first_name}}
+					<label for="first_name">First Name</label>
+				</div>
+				<br />
+				<div class="form-control">
+					<input type="text" name="last_name" id="id_last_name" {{ user_form.last_name}}
+					<label for="last_name">Last Name</label>
+				</div>
+				<br />
+				<div class="form-control">
+					<input type="text" name="email" id="id_email" {{ user_form.email}}
+					<label for="email">Email</label>
+				</div>
+				<br />
+				<div class="form-control">
+                    <label for="picture">Picture</label>
+                    <br />
+                    <input type="file" name="picture" id="picture" />
+				</div>
+				<br />
+                <div class="form-control">
+                    <input type="text" name="about" id="id_about" {{ user_profile_form.about}}
+                    <label for="about">About</label>
+                </div>
+                <br />
+                <a href="{% url 'destination:change_password' %}">Change Password</a>
         <button type="submit" class="btn btn-primary">Save</button>
         </div>
     </form>

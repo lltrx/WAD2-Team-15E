@@ -85,6 +85,7 @@ def change_password(request):
         form = PasswordChangeForm(data=request.POST, user=request.user)
         if form.is_valid():
             form.save()
+            update_session_auth_hash(request, form.user)
             return redirect(reverse('destination:my_profile'))
     else:
         form = PasswordChangeForm(user=request.user)
@@ -145,7 +146,7 @@ def register(request):
     registered = False
     if request.method == 'POST':
         user_form = RegistrationForm(request.POST)
-        user_profile_form = UserProfileForm(request.POST)
+        user_profile_form = UserProfileForm(request.POST, request.FILES)
         
         if user_form.is_valid() and user_profile_form.is_valid():
             user = user_form.save()

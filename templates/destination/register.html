@@ -14,8 +14,46 @@ Register
 		<form id="user_form" method="POST" action="{% url 'destination:register' %}" enctype="multipart/form-data">
 			{% csrf_token %}
 			<div class="container">					
-				{{ user_form.as_p }}
-				{{ user_profile_form.as_p }}
+				<div class="form-control">
+					{{ user_form.username }}
+					<label for="username">Username</label>
+				</div>
+				<br />
+				<div class="form-control">
+					{{ user_form.first_name}}
+					<label for="first_name">First Name</label>
+				</div>
+				<br />
+				<div class="form-control">
+					{{ user_form.last_name }}
+					<label for="last_name">Last Name</label>
+				</div>
+				<br />
+				<div class="form-control">
+					{{ user_form.email }}
+					<label for="email">Email</label>
+				</div>
+				<br />
+				<div class="form-control">
+					{{ user_form.password1 }}
+					<label for="password">Password</label>
+				</div>
+				<br />
+				<div class="form-control">
+					{{ user_form.password2 }}
+					<label for="password2">Confirm Password</label>
+				</div>
+				<br />
+				<div class="form-control">
+					{{ user_profile_form.picture }}
+					<label for="picture">Picture</label>
+				</div>
+				<br />
+				<div class="form-control">
+					{{ user_profile_form.about }}
+					<label for="about">about</label>
+				</div>
+				<br />
 				<button type="submit" class="btn btn-primary">Register</button>
 		</form>
 	</div>

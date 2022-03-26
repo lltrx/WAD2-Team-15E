@@ -10,25 +10,34 @@ Add a destination
     <form id="destination_form" method="post" enctype="multipart/form-data" action="{% url 'destination:add_destination' %}">
         {% csrf_token %}
         <div class="container">
-            <label for="title">title</label>
+            <div class="form-control">
+            <label for="title">Title:</label>
             <br />
             <input type="text" name="name" id="name" required>
+            </div>
             <br />
-            <label for="destination_type">type</label>
+            <div class="form-control">
+            <label for="destination_type">Type:</label>
             <br />
             <select name="{{ form.destination_type.html_name }}" value="{{ form.destination_type.value }}" id="{{ form.destination_type.id_for_label }}">
                 {% for widget in form.destination_type.subwidgets %}
                     {{ widget }}
                 {% endfor %}
             </select>
+            </div>
             <br />
-            <label for="description">description</label>
+            <div class="form-control">
+            <label for="description">Description :</label>
             <br />
              <input type="text" name="description" id="description" required>
+            </div>
             <br />
+            <div class="form-control">
             <label for="image">image</label>
             <br />
                 <input type="file" name="image" id="image" >
+            </div>
+            <br />
         <button type="submit" class="btn">Add</button>
         </div>
     </form>
