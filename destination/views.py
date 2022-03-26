@@ -38,16 +38,17 @@ def destination_menu(request):
 @login_required
 def my_profile(request):
     context_dict = {}
-    user_destinations = Destination.objects.filter(author=request.user)
-    context_dict['user_destinations'] = user_destinations
+    context_dict['user_destinations'] = Destination.objects.filter(author=request.user)
+    context_dict['user_profile'] = UserProfile.objects.get_or_create(user=request.user)[0]
     return render(request, 'destination/profile.html', context_dict)
 
 @login_required
 def edit_profile(request):
     edited = False
+    userprofile = UserProfile.objects.get_or_create(user=request.user)[0]
     if request.method == 'POST':
         user_form = EditProfileForm(request.POST, instance=request.user)
-        user_profile_form = UserProfileForm(request.POST, instance=request.user.userprofile)
+        user_profile_form = UserProfileForm(request.POST, instance=userprofile)
         
         if user_form.is_valid() and user_profile_form.is_valid():
             user = user_form.save()
@@ -59,6 +60,7 @@ def edit_profile(request):
             
             profile.save()
             edited = True
+            return redirect(reverse('destination:my_profile'))
         else:
             print(user_form.errors, user_profile_form.errors)
                     
@@ -70,8 +72,10 @@ def edit_profile(request):
 def user_profile(request, username):
     context_dict = {}
     user = User.objects.get(username=username)
+    user_profile = UserProfile.objects.get_or_create(user=user)[0]
     user_destinations = Destination.objects.filter(author=user)
     context_dict['target_user'] = user
+    context_dict['user_profile'] = user_profile
     context_dict['user_destinations'] = user_destinations
     return render(request, 'destination/user_profile.html', context_dict)
 
@@ -81,7 +85,7 @@ def change_password(request):
         form = PasswordChangeForm(data=request.POST, user=request.user)
         if form.is_valid():
             form.save()
-            return redirect(reverse('destination:profile'))
+            return redirect(reverse('destination:my_profile'))
     else:
         form = PasswordChangeForm(user=request.user)
         context_dict = {'form': form}

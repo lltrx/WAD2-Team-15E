@@ -17,14 +17,14 @@ Your profile
     <a href="{% url 'destination:edit_profile' %}">Edit Profile</a><br />  
 
     {% if user.userprofile.picture %}
-        <img src="{{ user.userprofile.picture.url }}">
+        <img src="{{ user_profile.picture.url }}">
     {% else %}
         <img src="{% static 'images/user_pic_placeholder.png' %}">
     {% endif %}
 
     <h5>About me</h5> 
-    {% if user_profile_from.about %}
-        <p>{{ user_profile_from.about }}</p>
+    {% if user_profile.about %}
+        <p>{{ user_profile.about }}</p>
     {% else %}
         <p>This is about me!</p>
     {% endif %}
