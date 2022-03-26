@@ -2,6 +2,7 @@ from django.urls import path
 from destination import views
 from django.conf.urls import url
 
+
 app_name = 'destination'
 
 urlpatterns = [
@@ -18,5 +19,4 @@ urlpatterns = [
     path('user_profile/<slug:username>/', views.user_profile, name='user_profile'),
     path('my_profile/edit/', views.edit_profile, name='edit_profile'),
     path('change_password/', views.change_password, name='change_password'),
-    
 ]

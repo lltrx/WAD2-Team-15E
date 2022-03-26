@@ -146,7 +146,7 @@ def register(request):
     registered = False
     if request.method == 'POST':
         user_form = RegistrationForm(request.POST)
-        user_profile_form = UserProfileForm(request.POST, request.FILES)
+        user_profile_form = UserProfileForm(request.POST, request.FILES )
         
         if user_form.is_valid() and user_profile_form.is_valid():
             user = user_form.save()
