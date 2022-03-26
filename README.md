@@ -11,10 +11,7 @@ The objective of Scotland Destinations is to give those who are looking for hist
 ```term 
 git clone https://github.com/lltrx/WAD2-Team-15E
 ```
-
-
-
-###Execution
+### Execution
 
 
 
