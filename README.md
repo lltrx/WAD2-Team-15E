@@ -11,7 +11,19 @@ The objective of Scotland Destinations is to give those who are looking for hist
 ```term 
 git clone https://github.com/lltrx/WAD2-Team-15E
 ```
+Go into the cloned repository and install the Python dependencies.
+```term 
+python3 -m pip install -r requirements.txt
+```
 ### Execution
+You can use the following program to run the website
+```term
+conda activate rango
+```
+```term
+python manage.py runserver
+```
+(You need to use command "cd name" and then use conda activate rango")
 
 
 
