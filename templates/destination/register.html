@@ -11,52 +11,44 @@ Register
 		<a href="{% url 'destination:index' %}">Go to the homepage.</a><br />
 	{% else %}
 		<h1> Register here! </h1>
-		<form id="user_form" method="POST" action="{% url 'destination:register' %}" enctype="multipart/form-data">
+		<form id="user_form" method="POST" action="{% url 'destination:register' %}" enctype="multipart/form-data" >
 			{% csrf_token %}
-			<div class="container">					
-				<div class="form-control">
-					{{ user_form.username }}
+			<div class="form-group">
 					<label for="username">Username</label>
-				</div>
-				<br />
-				<div class="form-control">
+					{{ user_form.username }}
+			</div>
+				<div class="form-group">
+				<label for="first_name">First Name</label>
 					{{ user_form.first_name}}
-					<label for="first_name">First Name</label>
 				</div>
-				<br />
-				<div class="form-control">
+				<div class="form-group">
+				<label for="last_name">Last Name</label>
 					{{ user_form.last_name }}
-					<label for="last_name">Last Name</label>
 				</div>
-				<br />
-				<div class="form-control">
+				<div class="form-group">
+				<label for="email">Email</label>
 					{{ user_form.email }}
-					<label for="email">Email</label>
 				</div>
-				<br />
-				<div class="form-control">
+				<div class="form-group">
+				<label for="password">Password</label>
 					{{ user_form.password1 }}
-					<label for="password">Password</label>
 				</div>
-				<br />
-				<div class="form-control">
+				<div class="form-group">
+				<label for="password2">Confirm Password</label>
 					{{ user_form.password2 }}
-					<label for="password2">Confirm Password</label>
 				</div>
-				<br />
-				<div class="form-control">
+				<div class="form-group">
+				<label for="picture">Picture</label>
 					{{ user_profile_form.picture }}
-					<label for="picture">Picture</label>
 				</div>
-				<br />
-				<div class="form-control">
+				<div class="form-group">
+				<label for="about">about</label>
 					{{ user_profile_form.about }}
-					<label for="about">about</label>
 				</div>
-				<br />
+				<div class="form-group">
 				<button type="submit" class="btn btn-primary">Register</button>
+				</div>
 		</form>
-	</div>
 	{% endif %}
-	<script src="{% static 'style/inputs.js'%}"></script>
+	
 {% endblock %}

@@ -8,38 +8,44 @@ Your profile
     
 
 {% block body_block %}
-<div id="user-profile">
+
     
     
     <h1>Your Profile</h1>
     <h3>Welcome {{user.username}}!</h3>
-    
-    <a href="{% url 'destination:edit_profile' %}">Edit Profile</a><br />  
 
+
+    <div class="card" style="width: 18rem;">
     {% if user.userprofile.picture %}
         <img src="{{ user_profile.picture.url }}">
     {% else %}
         <img src="{% static 'images/user_pic_placeholder.png' %}">
     {% endif %}
 
-    <h5>About me</h5> 
+    <h5 class="card-title">About me</h5> 
     {% if user_profile.about %}
-        <p>{{ user_profile.about }}</p>
+    <div class="card-body">
+        <p class="card-text">{{ user_profile.about }}</p>
     {% else %}
-        <p>This is about me!</p>
+        <p class="card-text">This is about me!</p>
+   
     {% endif %}
+  
+    </div>
+    </div>
     {% if user_destinations %}
+    <div class="card" style="width: 18rem;">
        <h5>User's destinations</h5>
-       <div id="destination-card-query">
+
            {% for dest in user_destinations %}
-              <div class="destination-card">
+   
                 <a href="{% url 'destination:show_destination' dest.slug %}"><h3>{{ dest.name }}</h3></a>
                 <p>{{ dest.description }}</p>
 
-              </div>
+
             {% endfor %}
-       </div>
+    </div>
     {% endif %}
 
-<div>
+
 {% endblock%}

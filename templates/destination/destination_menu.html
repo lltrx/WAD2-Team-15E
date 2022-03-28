@@ -5,35 +5,38 @@ Homepage
 {% endblock %} 
 
 {% block body_block %}
-<div id="destination-menu">
-  <div>
+
     {% if user.is_authenticated %}
      <h2> Welcome {{ user.username }}, let's explore some interesting destinations in Scotland!</h2> 
     {% else %}
       Let's explore some interesting destinations in Scotland!
     {% endif %}
-  </div>
 
-  <div>
-    <h2>Most Liked Destinations</h2>
 
+  
+    <h2>Destinations</h2>
+    
     {% if destinations %}
-    <div id="destination-card-query">
       {% for dest in destinations %}
-      <div class="destination-card">
-        <a href="{% url 'destination:show_destination' dest.slug %}"><h3>{{ dest.name }}</h3></a>
-        <p>{{ dest.description }}</p>
+     
+        <ul class="list-group list-group-flush">
+      <div class="card" style="width: 18rem;">
+        
         {% if dest.image %}
-          <img src="{{ dest.image.url }}">
-        {% endif %}
-      </div>
-      {% endfor %}
+        <img src="{{ dest.image.url }}" class="card-img-top">
+      {% endif %}
+        <h5 class="card-title">{{ dest.name }}</h5>
+        <p class="card-text">{{ dest.description }}</p>
+       
+        <a href="{% url 'destination:show_destination' dest.slug %}" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="View the destination">View</a>
+
+    </ul>
     </div>
+      {% endfor %}
+    
     {% else %}
     <strong>There are no destinations present.</strong>
     {% endif %}
 
-  </div>
-</div>
 
 {% endblock %}

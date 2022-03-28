@@ -32,31 +32,54 @@
     
     <form action="{% url 'destination:like_destination' destination.slug %}" method="POST">
         {% csrf_token %}
-        <button type="submit", name="post_id", value="{{ post.id }}", class="btn">Like</button>
+        <button type="submit", name="post_id", value="{{ post.id }}",class="btn btn-outline-dark">Like</button>
         {{ total_likes }} likes
     </form>
-        
+    <div class="card">
+        <div class="card-header">
     <h3>Comments</h3>
+        </div>
+        
     {% if not destination.comments.all %}
+    <div class="card-body">
         No comments yet.. 
+    </div>
     {% else %}
         {% for comment in destination.comments.all %}
+        <div class="card-body">
+                {% if user.userprofile.picture %}
+                    <img src="{{ user_profile.picture.url }}">
+                {% else %}
+                    <img src="{% static 'images/user_pic_placeholder.png' %}">
+                {% endif %}
             <strong> {{ comment.user }} 
                 On {{ comment.created_date }} </strong>
                 <br />
+                <blockquote class="blockquote mb-0">
             <p> {{ comment.text }} </p>
-            <p> {{ comment.rate }}
+            <footer class="blockquote-footer">  Rate: {{ comment.rate }} </footer>
+        </blockquote>
+    </div>
+    </div>
         {% endfor %}
     {% endif %} 
     <br />
     {%if user.is_authenticated %}
-    <h3> Add a comment </h3>
+    </p>
+    <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+      Add comment
+      </button>
+    </p>
+    <div class="collapse" id="collapseExample">
+        <div class="card card-body">
         <form method="post" action=".">
              {% csrf_token %}
              {{ form.as_table }}
 
-                <button type="submit" class="btn">Submit</button>
+                <button type="submit" class="btn btn-outline-dark">Submit</button>
         </form>
+        </div>
+    </div>
     {% endif %}
 
 
