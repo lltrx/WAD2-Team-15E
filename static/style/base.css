@@ -31,3 +31,8 @@ img {
   margin: auto;
   text-indent: 100px;
 }
+
+.red-button {
+  color: white;
+  background-color: red;
+}

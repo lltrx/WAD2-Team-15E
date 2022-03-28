@@ -32,6 +32,14 @@ class Destination(models.Model):
 
     def total_likes(self):
         return self.likes.count()
+
+    def total_rating(self):
+        comments = Comment.objects.filter(destination=self)
+        rating_total = 0
+        for rating in comments:
+            rating_total += rating.rate
+        return rating_total/comments.count()
+
     class Meta:
         verbose_name_plural = 'Destinations'
 

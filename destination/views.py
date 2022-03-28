@@ -101,6 +101,8 @@ def show_destination(request, destination_name_slug):
         context_dict['destination'] = destination
         total_likes = destination.total_likes()
         context_dict['total_likes'] = total_likes
+        total_rating = destination.total_rating()
+        context_dict['total_rating'] = total_rating
         if request.method == "POST":
             form = CommentForm(request.POST)
             if form.is_valid():

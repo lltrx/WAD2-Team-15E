@@ -23,6 +23,8 @@
     {% endif %}
     <p>Type: {{ destination.get_destination_type_display }}</p>
 
+    <p>Rating: {{ total_rating }}</p>
+
     <p>{{ destination.description }}</p>
 
     {% if destination.author != null %}
