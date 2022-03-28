@@ -1,5 +1,5 @@
 from django import forms
-from destination.models import UserProfile, Destination
+from destination.models import UserProfile, Destination, Comment
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 
@@ -79,3 +79,12 @@ class EditProfileForm(UserChangeForm):
             "last_name",
             "username",
             "password")
+        
+class CommentForm(forms.ModelForm):
+    
+    class Meta:
+        model = Comment
+        fields = (
+            "user",
+            "text",)
+    

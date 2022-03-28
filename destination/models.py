@@ -23,15 +23,28 @@ class Destination(models.Model):
     image = models.ImageField(upload_to='destination_images', blank=True)
     destination_type = models.CharField(max_length=1, choices=DESTINATION_TYPES, default='O')
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, blank=True, null=True)
+    likes = models.ManyToManyField(User, related_name='likes', blank=True)
     
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.name)
         super(Destination, self).save(*args, **kwargs)
 
+    def total_likes(self):
+        return self.likes.count()
     class Meta:
         verbose_name_plural = 'Destinations'
 
     def __str__(self):
         return self.slug
     
+
+class Comment(models.Model):
+    destination = models.ForeignKey(Destination, on_delete=models.CASCADE, related_name='comments')
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    text = models.TextField()
+    created_date = models.DateTimeField(auto_now_add=True)
+        
+    def __str__(self):
+        return '%s - %s' % (self.user.username, self.destination.name)
+ 

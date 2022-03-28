@@ -29,6 +29,36 @@
         <a href="{% url 'destination:user_profile' destination.author %}">view the author's profile</a>
     {% endif %}
 
+    
+    <form action="{% url 'destination:like_destination' destination.slug %}" method="POST">
+        {% csrf_token %}
+        <button type="submit", name="post_id", value="{{ post.id }}", class="btn">Like</button>
+        {{ total_likes }} likes
+    </form>
+        
+    <h3>Comments</h3>
+    {% if not destination.comments.all %}
+        No comments yet.. 
+    {% else %}
+        {% for comment in destination.comments.all %}
+            <strong> {{ comment.user }} 
+                On {{ comment.created_date }} </strong>
+                <br />
+            <p> {{ comment.text }} </p>
+        {% endfor %}
+    {% endif %} 
+    <br />
+    {%if user.is_authenticated %}
+    <h3> Add a comment </h3>
+        <form method="post" action=".">
+             {% csrf_token %}
+             {{ form.as_table }}
+
+                <button type="submit" class="btn">Submit</button>
+        </form>
+    {% endif %}
+
+
     {%if user.is_authenticated %}
         
     {%endif%}
@@ -36,3 +66,4 @@
     The specified destination does not exist.
     {% endif %}
 {% endblock %}
+ 

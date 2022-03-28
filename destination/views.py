@@ -1,12 +1,12 @@
-from django.shortcuts import render, redirect
-from django.http import HttpResponse
+from django.shortcuts import render, redirect, get_object_or_404
+from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 from django.http.response import HttpResponseNotModified
 from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
 from django.contrib.auth.decorators import login_required
 from datetime import datetime
-from destination.forms import DestinationForm, RegistrationForm, EditProfileForm, UserProfileForm, UserProfileChangeForm
-from destination.models import Destination, UserProfile
+from destination.forms import DestinationForm, RegistrationForm, EditProfileForm, UserProfileForm, UserProfileChangeForm, CommentForm
+from destination.models import Destination, UserProfile, Comment
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserChangeForm, UserCreationForm, PasswordChangeForm
 
@@ -92,11 +92,27 @@ def change_password(request):
         context_dict = {'form': form}
         return render(request, 'destination/change_password.html', context=context_dict)
         
+
 def show_destination(request, destination_name_slug):
     context_dict = {}
     try:
+        
         destination = Destination.objects.get(slug=destination_name_slug)
         context_dict['destination'] = destination
+        total_likes = destination.total_likes()
+        context_dict['total_likes'] = total_likes
+        if request.method == "POST":
+            form = CommentForm(request.POST)
+            if form.is_valid():
+                comment = form.save(commit=False)
+                comment.destination = destination
+                comment.author = request.user
+                comment.save()
+                return redirect(reverse('destination:show_destination', kwargs={'destination_name_slug': destination_name_slug}))
+        else:
+            form = CommentForm()
+            
+        context_dict['form'] = form 
     except Destination.DoesNotExist:
         context_dict['destination'] = None
         return render(request, 'destination/destination.html', context=context_dict)
@@ -193,6 +209,14 @@ def user_login(request):
 def user_logout(request):
     logout(request)
     return redirect(reverse('destination:index'))
+
+@login_required
+def like_destination(request, destination_name_slug):
+    destination = Destination.objects.get(slug=destination_name_slug)
+    destination.likes.add(request.user)
+    return redirect(reverse('destination:show_destination', kwargs={'destination_name_slug':destination_name_slug}))
+
+
 
 '''
 def get_server_side_cookie(request, cookie, default_val=None):

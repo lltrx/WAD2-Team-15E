@@ -1,5 +1,5 @@
 from django.contrib import admin
-from destination.models import UserProfile, Destination
+from destination.models import UserProfile, Destination,Comment
 
 # Register your models here.
 
@@ -21,5 +21,6 @@ class UserProfileAdmin(admin.ModelAdmin):
 
 admin.site.register(UserProfile, UserProfileAdmin)
 admin.site.register(Destination, DestinationAdmin)
+admin.site.register(Comment)
 
 
