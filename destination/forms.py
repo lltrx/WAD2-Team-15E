@@ -1,5 +1,5 @@
 from django import forms
-from destination.models import UserProfile, Destination, Comment
+from destination.models import UserProfile, Destination, Comment, Rate_Choices
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 
@@ -81,10 +81,12 @@ class EditProfileForm(UserChangeForm):
             "password")
         
 class CommentForm(forms.ModelForm):
-    
+    rate = forms.ChoiceField(choices=Rate_Choices, required=False)
     class Meta:
         model = Comment
         fields = (
             "user",
-            "text",)
+            "text",
+            "rate",
+            )
     

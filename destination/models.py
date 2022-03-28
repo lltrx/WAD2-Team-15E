@@ -38,12 +38,13 @@ class Destination(models.Model):
     def __str__(self):
         return self.slug
     
-
+Rate_Choices = [(1, '1 - Not good'), (2, '2 - Average'), (3, '3 - Good'), (4, '4 - Very good'), (5, '5 - Excellent')]
 class Comment(models.Model):
     destination = models.ForeignKey(Destination, on_delete=models.CASCADE, related_name='comments')
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     text = models.TextField()
     created_date = models.DateTimeField(auto_now_add=True)
+    rate = models.PositiveSmallIntegerField(choices=Rate_Choices, blank=True, null=True)
         
     def __str__(self):
         return '%s - %s' % (self.user.username, self.destination.name)
