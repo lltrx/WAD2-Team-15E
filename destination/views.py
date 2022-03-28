@@ -144,18 +144,17 @@ def edit_destination(request, destination_name_slug):
 
     destination = Destination.objects.get(slug=destination_name_slug)
     context_dict['instance'] = destination
+    print(destination.destination_type)
     if request.method == 'POST':
-        form = DestinationForm(request.POST, request.FILES, instance=destination)
-        #form = EditProfileForm(request.POST, instance=request.user)
+        form = DestinationForm(request.POST, request.FILES, instance=destination, initial={'destination_type': destination.destination_type })
         
         if form.is_valid():
-            form.save(request)
-            return redirect(reverse('destination:show_destination', kwargs={'destination_name_slug':destination_name_slug}))
+            new = form.save(request)
+            return redirect(reverse('destination:show_destination', kwargs={'destination_name_slug':new.slug}))
         
     else:
-        form = DestinationForm(request.FILES, instance=destination)
+        form = DestinationForm(request.FILES, instance=destination, initial={'destination_type': destination.destination_type })
         context_dict['form'] = form
-        print("hey")
         return render(request, 'destination/edit_destination.html', context=context_dict)
 
 def register(request):
@@ -216,7 +215,11 @@ def like_destination(request, destination_name_slug):
     destination.likes.add(request.user)
     return redirect(reverse('destination:show_destination', kwargs={'destination_name_slug':destination_name_slug}))
 
-
+@login_required
+def delete_destination(request, destination_name_slug):
+    destination = Destination.objects.get(slug=destination_name_slug)
+    destination.delete()
+    return redirect(reverse('destination:destination_menu'))
 
 '''
 def get_server_side_cookie(request, cookie, default_val=None):

@@ -12,6 +12,7 @@ Edit destination
 <div>
     <form id="destination_form" method="post" enctype="multipart/form-data" action="{% url 'destination:edit_destination' destination_name_slug=instance %}">
         {% csrf_token %}
+
         <div class="container">
             <label for="title">title</label>
             <br />
@@ -19,8 +20,12 @@ Edit destination
             <br />
             <label for="destination_type">type</label>
             <br />
-            <select name="{{ form.destination_type.html_name }}" value="{{ instance.destination_type }}" id="{{ form.destination_type.id_for_label }}">
+            <select name="destination_type" value="{{ instance.destination_type }}" id="{{ form.destination_type.id_for_label }}">
                 {% for widget in form.destination_type.subwidgets %}
+                    {% if widget == form.destination_type.initial %}
+                        initial
+                    {% endif %}
+                    
                     {{ widget }}
                 {% endfor %}
             </select>
@@ -31,12 +36,20 @@ Edit destination
             <br />
             <label for="image">image</label>
             <br />
-            <img src="{{ instance.image.url }}">
+            {% if instance.image %}
+                <img src="{{ instance.image.url }}">
             <br />
+            {% endif %}
             <label for="replace_image">replace image</label>
             <input type="file" name="image" id="image" value="{{ instance.image }}">
-        <button type="button" class="btn btn-outline-dark">Save</button>
+            <br />
+            <button type="submit" class="btn btn-outline-dark">Save</button>
         </div>
+    </form>
+    <br />
+    <form action="{% url 'destination:delete_destination' instance.slug %}" method="POST">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-outline-dark red-button">Delete destination</button>
     </form>
 </div>
 {% endblock%}
