@@ -8,8 +8,9 @@ body{
 }
 nav {
   background-color: #A0522D;
-  height: 50px;
-  width: 50px;
+  height: 8%;
+  width: 100%;
+  text-align: center;
   display: flex;
   align-items: center;
   justify-content: center;

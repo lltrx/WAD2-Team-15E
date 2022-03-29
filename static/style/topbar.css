@@ -1,4 +1,4 @@
-nav {
+/* nav {
     background-color: #A0522D;
     height: 50px;
     width: 50px;
@@ -7,7 +7,7 @@ nav {
     justify-content: center;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
     overflow: hidden;
-    }
+    } */
   nav.active {
     width: auto;
   
