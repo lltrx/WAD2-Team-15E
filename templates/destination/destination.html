@@ -12,32 +12,36 @@
 
 {% block body_block %}
     {% if destination %}
-    <h1>{{ destination.name }}</h1>
+    <h1 class="dest-name">{{ destination.name }}</h1>
 
+    <br />
     {% if destination.author == request.user %}
         <a href="{% url 'destination:edit_destination' destination.slug %}">Edit Destination</a><br />
     {% endif %} 
 
     {% if destination.image %}
-      <img src="{{ destination.image.url }}">
+      <img src="{{ destination.image.url }}" class="dest-img">
     {% endif %}
-    <p>Type: {{ destination.get_destination_type_display }}</p>
+    <br />
+    <br />
+    <p class="dest-type">Type: {{ destination.get_destination_type_display }}</p> <p class="dest-rate">Rating: {{ total_rating }}</p>
+    <br />
+    
 
-    <p>Rating: {{ total_rating }}</p>
-
-    <p>{{ destination.description }}</p>
+    <p class="dest-des">{{ destination.description }}</p>
 
     {% if destination.author != null %}
         <a href="{% url 'destination:user_profile' destination.author %}">view the author's profile</a>
     {% endif %}
 
     
-    <form action="{% url 'destination:like_destination' destination.slug %}" method="POST">
+    <form action="{% url 'destination:like_destination' destination.slug %}" method="POST" class="like">
         {% csrf_token %}
-        <button type="submit", name="post_id", value="{{ post.id }}",class="btn btn-outline-dark">Like</button>
+        <button type="submit", name="post_id", value="{{ post.id }}",class="like-btn">Like</button>
         {{ total_likes }} likes
     </form>
-    <div class="card">
+    
+    <div class="card-comment">
         <div class="card-header">
     <h3>Comments</h3>
         </div>
@@ -50,16 +54,16 @@
         {% for comment in destination.comments.all %}
         <div class="card-body">
                 {% if user.userprofile.picture %}
-                    <img src="{{ user_profile.picture.url }}">
+                    <img src="{{ user_profile.picture.url }}" class="comment-img">
                 {% else %}
-                    <img src="{% static 'images/user_pic_placeholder.png' %}">
+                    <img src="{% static 'images/user_pic_placeholder.png' %}" class="comment-img">
                 {% endif %}
             <strong> {{ comment.user }} 
                 On {{ comment.created_date }} </strong>
                 <br />
                 <blockquote class="blockquote mb-0">
             <p> {{ comment.text }} </p>
-            <footer class="blockquote-footer">  Rate: {{ comment.rate }} </footer>
+            <footer>  Rate: {{ comment.rate }} </footer>
         </blockquote>
     </div>
     </div>
@@ -68,12 +72,12 @@
     <br />
     {%if user.is_authenticated %}
     </p>
-    <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+    <button class="btn btn-primary" type="buttopon" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
       Add comment
       </button>
     </p>
     <div class="collapse" id="collapseExample">
-        <div class="card card-body">
+        <div class="comment-card-body">
         <form method="post" action=".">
              {% csrf_token %}
              {{ form.as_table }}
