@@ -1,106 +1,108 @@
 {% extends 'destination/base.html' %} {% load staticfiles %}
-    
-    {% block title %} Destinations {% endblock %}
-    
-    {% block title_block %}
-    {% if destination %}
-        {{ destination.name }}
-    {% else %}
-        Unknown destination
-    {% endif %}
+
+{% block title %} Destinations {% endblock %}
+
+{% block title_block %}
+{% if destination %}
+{{ destination.name }}
+{% else %}
+Unknown destination
+{% endif %}
 {% endblock %}
 
 {% block body_block %}
+<div class="destination-body">
     {% if destination %}
     <h1 class="dest-name">{{ destination.name }}</h1>
 
     <br />
     {% if destination.author == request.user %}
-        <a href="{% url 'destination:edit_destination' destination.slug %}">Edit Destination</a><br />
-    {% endif %} 
+    <a href="{% url 'destination:edit_destination' destination.slug %}">Edit Destination</a><br />
+    {% endif %}
 
     {% if destination.image %}
-      <img src="{{ destination.image.url }}" class="dest-img">
+    <img src="{{ destination.image.url }}" class="dest-img">
     {% endif %}
     <br />
     <br />
-    <p class="dest-type">Type: {{ destination.get_destination_type_display }}</p> <p class="dest-rate">Rating: {{ total_rating }}</p>
+    <p class="dest-type"><span>Type: </span> {{ destination.get_destination_type_display }}</p>
+    <p class="dest-rate"><span>Rating: </span> {{ total_rating }}</p>
     <br />
-    
+
 
     <p class="dest-des">{{ destination.description }}</p>
 
     {% if destination.author != null %}
-        <a href="{% url 'destination:user_profile' destination.author %}">view the author's profile</a>
+    <a href="{% url 'destination:user_profile' destination.author %}">view the author's profile</a>
     {% endif %}
 
-    
+
     <form action="{% url 'destination:like_destination' destination.slug %}" method="POST" class="like">
         {% csrf_token %}
-        <button type="submit", name="post_id", value="{{ post.id }}",class="like-btn">Like</button>
-        {{ total_likes }} likes
+        <button type="submit" , name="post_id" , value="{{ post.id }}" class="like-btn"><i class="fa-solid fa-heart"></i></button>
+        {{ total_likes }}
     </form>
-    
-    <div class="card-comment">
-        <div class="card-header">
-            <h3>Comments</h3>
-        </div>
-        
+</div>
+<div class="card-comment">
+    <div class="card-header">
+        <h3>Comments:</h3>
+    </div>
+
     {% if not destination.comments.all %}
     <div class="card-body">
-        No comments yet.. 
+        No comments yet..
     </div>
     {% else %}
-        {% for comment in destination.comments.all %}
-        <div class="card-body">
-                {% if comment.user.userprofile.picture %}
-                    <img src="{{ comment.user.user_profile.picture.url }}" class="comment-img">
-                    <p>{{ comment.user.user_profile.picture.url }}</p>
-                {% else %}
-                    <img src="{% static 'images/user_pic_placeholder.png' %}" class="comment-img">
-                {% endif %}
-            <strong><a href="{% url 'destination:user_profile' comment.user %}">{{ comment.user }}</a> 
-                On {{ comment.created_date }} </strong>
-                <br />
-                {% if comment.user == request.user %}
-                <form action="{% url 'destination:delete_comment' comment.pk %}" method="POST">
-                    {% csrf_token %}
-                    <button type="submit" class="btn btn-outline-dark red-button">Delete comment</button>
-                </form>
-                {% endif %}
-                <blockquote class="blockquote mb-0">
+    {% for comment in destination.comments.all %}
+    <div class="card-body">
+        {% if comment.user.userprofile.picture %}
+        <img src="{{ comment.user.user_profile.picture.url }}" class="comment-img">
+        <p>{{ comment.user.user_profile.picture.url }}</p>
+        {% else %}
+        <img src="{% static 'images/user_pic_placeholder.png' %}" class="comment-img">
+        {% endif %}
+        <strong><a href="{% url 'destination:user_profile' comment.user %}">{{ comment.user }}</a>
+            On {{ comment.created_date }} </strong>
+        <br />
+        {% if comment.user == request.user %}
+        <form action="{% url 'destination:delete_comment' comment.pk %}" method="POST">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-outline-dark red-button">Delete comment</button>
+        </form>
+        {% endif %}
+        <blockquote class="blockquote mb-0">
             <p> {{ comment.text }} </p>
-            <footer>  Rate: {{ comment.rate }} </footer>
+            <footer> Rate: {{ comment.rate }} </footer>
         </blockquote>
     </div>
-    </div>
-        {% endfor %}
-    {% endif %} 
-    <br />
-    {%if user.is_authenticated %}
-    </p>
-    <button class="btn btn-primary" type="buttopon" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-      Add comment
-      </button>
-    </p>
-    <div class="collapse" id="collapseExample">
-        <div class="comment-card-body">
+</div>
+{% endfor %}
+{% endif %}
+<br />
+{%if user.is_authenticated %}
+</p>
+<button class="btn btn-primary" type="buttopon" data-toggle="collapse" data-target="#collapseExample"
+    aria-expanded="false" aria-controls="collapseExample">
+    Add comment
+</button>
+</p>
+<div class="collapse" id="collapseExample">
+    <div class="comment-card-body">
         <form method="post" action="{% url 'destination:show_destination' destination.slug %}">
-             {% csrf_token %}
-             {{ form.as_table }}
+            {% csrf_token %}
+            {{ form.as_table }}
 
             <button type="submit" class="btn btn-outline-dark">Submit</button>
         </form>
-        </div>
     </div>
-    {% endif %}
+</div>
+{% endif %}
 
 
-    {%if user.is_authenticated %}
-        
-    {%endif%}
-    {% else %}
-    The specified destination does not exist.
-    {% endif %}
+{%if user.is_authenticated %}
+
+{%endif%}
+{% else %}
+The specified destination does not exist.
+{% endif %}
 {% endblock %}
- 

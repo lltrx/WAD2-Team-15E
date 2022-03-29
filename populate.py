@@ -10,7 +10,7 @@ def populate():
     destinations = {
         'Glasgow Necropolis': {'description': """The Glasgow Necropolis is a Victorian cementary in Glasgow, Scotland.
                                           It is on a low, but very prominent hill to the east of Glasgow Central."""},
-        'Edinburght City Centre': {'description': """Edinburgh's busy city centre is ranked amongst the most attractive in the world.
+        'Edinburgh City Centre': {'description': """Edinburgh's busy city centre is ranked amongst the most attractive in the world.
 
                                                 Exploring the medieval Old Town, you will discover the secrets of Edinburgh's past 
                                                 and can visit some of the city's top attractions, including Edinburgh Castle.

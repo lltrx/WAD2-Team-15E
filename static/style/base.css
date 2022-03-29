@@ -2,32 +2,61 @@ body{
     font-size: 20px;
     text-align: center;
     font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    background-color: #FAFAD2;
+    background-color: #1a1a1a;
+    color: rgba(255, 255, 255, 0.87);
 
 }
 
 
 nav {
-  background-color: #A0522D;
-  height: 8%;
+  z-index: 100;
+  height: 70px;
   width: 100%;
   text-align: center;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  border-bottom: 1px solid rgba(84, 84, 84, .48) !important;
   margin: 0 auto;
   padding: 0 30px;
   top: 0;
   position: fixed;
+  margin-bottom: 30px;
 }
-
-
+.dropdown-menu {
+  background: #1a1a1a;
+  border: 1px solid rgba(84, 84, 84, .48);
+}
+.dropdown-item {
+  color: rgba(255, 255, 255, .87)
+  
+}
+.dropdown-toggle::after {
+  position: relative;
+  top: 3px;
+}
+.dropdown-item:hover {
+  background: #1a1a1a;
+  color: #42b883;
+}
+.nav-link {
+  color: rgba(255, 255, 255, 0.87);
+}
+.green-color {
+  color: #42b883;
+}
+.green-hover:hover {
+  color: #42b883 !important;
+}
+.dropdown-hover:hover {
+  color: rgba(235, 235, 235, .6) !important;
+}
 .logo{
   background: url("/path") no-repeat; 
-  width: 100px; 
-  height: 100px; 
+  width: auto; 
+  height: 35px; 
   display: block; 
+  margin: 0 20px;
   text-indent: -9999px;
 }
 
@@ -43,26 +72,46 @@ nav {
   margin: 20px auto;
 }
 .card {
-  background-color: #A0522D;
-  width: 40rem;
+  background-color: #242424;
+  width: 50rem;
+  padding: 30px;
+  border-radius: 10px;
+  opacity: 0;
 }
 
 .card-title {
-  color: rgb(255, 255, 255);
+  color: #42b883;
   font-size: 30px;
   font-weight: bold; 
 }
 
 .card-text {
-  color: rgb(255, 255, 255);
+  color: rgba(255, 255, 255, 0.87);
   font-size: 20px;
+}
+.card-comment {
+  width: 1000px;
+  margin: 0 auto;
+  margin-top: 100px;
+  border: 1px solid rgba(235, 235, 235, .6);
+  padding: 10px;
+  border-radius: 10px;
 }
 
 .view {
   color: rgb(255, 255, 255);
-  font-size: 20px;
-  text-decoration: underline;
+  font-size: 22px;
+  padding: 3px 40px;
+  margin: 0 auto;
+  margin-top: 20px;
+  border: 1px solid #42b883;
+  border-radius: 10px;
 }
+.view:hover {
+  text-decoration: none;
+  color: #42b883;
+}
+
 
 .dest-img {
   max-width: 100%;
@@ -72,11 +121,20 @@ nav {
 .dest-name {
   font-size: 50px;
   font-weight: bold;
+  color: #42b883;
 }
 
 .dest-type {
   font-size: 20px;
   text-align: left;
+}
+.dest-type > span {
+  color:#42b883;
+  margin-right: 4px;
+}
+.dest-rate > span {
+  color: #42b883;
+  margin-right: 4px;
 }
 
 .dest-rate{
@@ -87,17 +145,47 @@ nav {
 .dest-des {
   font-size: 40px;
   text-align: left;
+  background:rgba(84, 84, 84, .48);
+  padding: 20 40px;
+  border-radius: 10px;
 }
 
 .like {
-  font-size: 20px;
+  font-size: 25px;
   text-align: left;
 }
+.like-btn {
+  background: none;
+  border: none;
+}
+.like-btn>i {
+  color: #971919;
+}
+#destination-title {
+  opacity: 0;
+}
 
+.destination-title-animation {
+  animation-name: enter-up;
+  animation-fill-mode: forwards;
+  animation-duration: 700ms;
+  position: relative;
+  top: 100px;
+}
+@keyframes enter-up{
+
+  to {
+    opacity: 1;
+    top: 0;
+  }
+}
 .card-header {
-  background-color: #A0522D;
   font-size: 20px;
   text-align: left;
+  color: #42b883;
+  border: none;
+  background: none;
+  border-bottom: 1px solid rgba(235, 235, 235, .6)
 }
 
 .comment-img {
@@ -109,4 +197,66 @@ nav {
 .card-body{
   text-align: left;
   font-size: 20px;
+}
+
+.login-title {
+  color: #42b883;
+  margin-bottom: 30px;
+}
+
+#login_form {
+  border: 1px solid rgba(84, 84, 84, .48);
+  width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  border-radius: 10px;
+}
+#user_form {
+  border: 1px solid rgba(84, 84, 84, .48);
+  width: 500px;
+  margin: 0 auto;
+  padding: 20px;
+  border-radius: 10px;
+}
+#user_form label {
+  margin-right: 5px;
+}
+#user_form input {
+  background: none;
+  border:  1px solid #42b883;
+  border-radius: 15px;
+  padding: 0 10px;
+  color:rgba(255, 255, 255, 0.87);
+  width: 250px;
+}
+
+#login_form label {
+  margin-right: 5px;
+}
+#login_form input {
+  background: none;
+  border:  1px solid #42b883;
+  border-radius: 15px;
+  padding: 0 10px;
+  color:rgba(255, 255, 255, 0.87);
+  width: 250px;
+}
+#login_form input:focus-visible {
+  border: 1px solid #42b883;
+}
+
+.login-button {
+  background-color:rgba(84, 84, 84, .48);
+  border-radius: 20px;
+  color: #42b883;
+  border: none;
+  width: 200px;
+}
+.login-button:first-child {
+  margin-top: 15px;
+}
+
+.destination-body {
+  max-width: 1000px;
+  margin: 0 auto;
 }

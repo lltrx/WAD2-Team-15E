@@ -7,34 +7,34 @@ Register
 
 {% block body_block %}
 	{% if registered %}
-		<h1>Thank you for registering!</h1>
+		<h2 class="login-title">Thank you for registering!</h1>
 		<a href="{% url 'destination:index' %}">Go to the homepage.</a><br />
 	{% else %}
-		<h1> Register here! </h1>
+		<h2 class="login-title">Register</h1>
 		<form id="user_form" method="POST" action="{% url 'destination:register' %}" enctype="multipart/form-data" >
 			{% csrf_token %}
 			<div class="form-group">
-					<label for="username">Username</label>
+					<label for="username">Username:</label>
 					{{ user_form.username }}
 			</div>
 				<div class="form-group">
-				<label for="first_name">First Name</label>
+				<label for="first_name">First Name:</label>
 					{{ user_form.first_name}}
 				</div>
 				<div class="form-group">
-				<label for="last_name">Last Name</label>
+				<label for="last_name">Last Name:</label>
 					{{ user_form.last_name }}
 				</div>
 				<div class="form-group">
-				<label for="email">Email</label>
+				<label for="email">Email:</label>
 					{{ user_form.email }}
 				</div>
 				<div class="form-group">
-				<label for="password">Password</label>
+				<label for="password">Password:</label>
 					{{ user_form.password1 }}
 				</div>
 				<div class="form-group">
-				<label for="password2">Confirm Password</label>
+				<label for="password2">Confirm Password:</label>
 					{{ user_form.password2 }}
 				</div>
 				<div class="form-group">
@@ -42,11 +42,11 @@ Register
 					{{ user_profile_form.picture }}
 				</div>
 				<div class="form-group">
-				<label for="about">about</label>
+				<label for="about">Description:</label>
 					{{ user_profile_form.about }}
 				</div>
 				<div class="form-group">
-				<button type="submit" class="btn btn-primary">Register</button>
+				<button type="submit" class="login-button btn btn-primary">Register</button>
 				</div>
 		</form>
 	{% endif %}

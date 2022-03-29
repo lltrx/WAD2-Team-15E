@@ -1,75 +1,86 @@
-{% load staticfiles %} 
+{% load staticfiles %}
 
 <html>
-  <head lang="en">
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>
-      Historical places - {% block title_block %} {% endblock %}
-    </title>
-    
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="{% static 'style/base.css' %}">
 
-    
-  </head>
-  <body>
-    
+<head lang="en">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>
+    Historical places - {% block title_block %} {% endblock %}
+  </title>
 
-    
-      <nav class="navbar navbar-fixed-top navbar-expand-lg navbar-light ">
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="{% static 'style/base.css' %}">
+  <link rel="icon" type="image/x-icon" href="/static/images/favicon.png">
+  <script src="https://kit.fontawesome.com/60f74f177c.js" crossorigin="anonymous"></script>
 
-          <img src="{% static 'images/logo2.png' %}" alt="logo" class="logo" />
 
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-          <a class="nav-link" href="{% url 'destination:index' %}">Home</a>
-          </li>
-          <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" d="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="{% url 'destination:destination_menu' %}">Destinations</a>
-         
+</head>
+
+<body>
+  <nav class="navbar navbar-fixed-top navbar-expand-lg">
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+      <img src="{% static 'images/logo.png' %}" alt="logo" class="logo" />
+
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link green-hover" href="{% url 'destination:index' %}">Home</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle dropdown-hover" d="navbarDropdown" role="button" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false" href="{% url 'destination:destination_menu' %}">Destinations</a>
+
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
             <a class="dropdown-item" href="{% url 'destination:destination_menu' %}">Destinations</a>
             {% if user.is_authenticated %}
             <a class="dropdown-item" href="{% url 'destination:add_destination'%}">Add New Destination</a>
           </div>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" d="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="{% url 'destination:my_profile' %}">Profile</a>
-          
+        <li class="nav-item dropdown dropdown-hover">
+          <a class="nav-link green-hover dropdown-toggle" d="navbarDropdown" role="button" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false" href="{% url 'destination:my_profile' %}">Profile</a>
+
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
             <a class="dropdown-item" href="{% url 'destination:my_profile'%}">My Profile</a>
             <a class="dropdown-item" href="{% url 'destination:edit_profile' %}">Edit Profile</a>
             <a class="dropdown-item" href="{% url 'destination:change_password' %}">Change Password</a>
           </div>
         </li>
-            <li class="nav-item active">
-            <a class="nav-link" href="{% url 'destination:logout' %}">Sign Out</a>
-            </li>
-          {% else %}
-          <li class="nav-item active">
-            <a class="nav-link" href="{% url 'destination:register' %}">Sign Up</a>
-          </li>
-          <li class="nav-item active">
-            <a class="nav-link" href="{% url 'destination:login' %}">Login</a>
-          </li>
-          {% endif %}
-          <li class="nav-item active">
-          <a class="nav-link" href="{% url 'destination:help' %}">Help</a>
-          </li>
-  
-          </li>
-          </ul>
-         
-      </div>
-  
-    </nav>
+        <li class="nav-item">
+          <a class="nav-link green-hover" href="{% url 'destination:logout' %}">Sign Out</a>
+        </li>
+        {% else %}
+        <li class="nav-item">
+          <a class="nav-link green-hover" href="{% url 'destination:register' %}">Sign Up</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link green-hover" href="{% url 'destination:login' %}">Login</a>
+        </li>
+        {% endif %}
+        <li class="nav-item">
+          <a class="nav-link green-hover" href="{% url 'destination:help' %}">Help</a>
+        </li>
 
-  
-   {% block body_block %} {% endblock %}
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        </li>
+      </ul>
 
-  </body>
+    </div>
+
+  </nav>
+
+
+  {% block body_block %} {% endblock %}
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+
+</body>
+
 </html>

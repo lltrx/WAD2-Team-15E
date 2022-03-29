@@ -1,20 +1,15 @@
 {% extends 'destination/base.html' %} {% load staticfiles %} 
-
 {% block title_block %}
 Homepage
 {% endblock %} 
 
 {% block body_block %}
-
+<script src="/static/style/destination_menu.js"></script>
     {% if user.is_authenticated %}
-     <h2> Welcome {{ user.username }}, let's explore some interesting destinations in Scotland!</h2> 
+     <h2 id="destination-title"> Welcome {{ user.username }}, let's explore some interesting destinations in Scotland!</h2> 
     {% else %}
-      Let's explore some interesting destinations in Scotland!
+      <h2 id="destination-title">Let's explore some interesting destinations in Scotland!</h2>
     {% endif %}
-
-
-  
-    <h2>Destinations</h2>
     
     {% if destinations %}
       {% for dest in destinations %}
@@ -28,7 +23,7 @@ Homepage
         <h5 class="card-title">{{ dest.name }}</h5>
         <p class="card-text">{{ dest.description }}</p>
        
-        <a href="{% url 'destination:show_destination' dest.slug %}" class="view" data-toggle="tooltip" data-placement="top" title="View the destination">View</a>
+        <a href="{% url 'destination:show_destination' dest.slug %}" class="view" data-toggle="tooltip" data-placement="top" title="View the destination"><i class="fa-solid fa-arrow-right-long"></i></a>
 
     </ul>
     </div>
