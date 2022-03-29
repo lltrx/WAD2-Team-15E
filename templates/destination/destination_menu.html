@@ -28,7 +28,10 @@ Homepage
         <h5 class="card-title">{{ dest.name }}</h5>
         <p class="card-text">{{ dest.description }}</p>
        
-        <a href="{% url 'destination:show_destination' dest.slug %}" class="view" data-toggle="tooltip" data-placement="top" title="View the destination">View</a>
+        
+        <a href="{% url 'destination:show_destination' dest.slug %}" class="view" data-toggle="tooltip" data-placement="top" title="View the destination"> 
+          View
+        </a>
 
     </ul>
     </div>

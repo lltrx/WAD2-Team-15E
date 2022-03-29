@@ -7,7 +7,7 @@
     <title>
       Historical places - {% block title_block %} {% endblock %}
     </title>
-    
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="{% static 'style/base.css' %}">
 
@@ -24,7 +24,7 @@
 
           <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-          <a class="nav-link" href="{% url 'destination:index' %}">Home</a>
+           <a class="nav-link" href="{% url 'destination:index' %}"> Home </a>
           </li>
           <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" d="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="{% url 'destination:destination_menu' %}">Destinations</a>
@@ -39,7 +39,7 @@
           
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
             <a class="dropdown-item" href="{% url 'destination:my_profile'%}">My Profile</a>
-            <a class="dropdown-item" href="{% url 'destination:edit_profile' %}">Edit Profile</a>
+            <a class="dropdown-item" href="{% url 'destination:edit_profile' %}"> Edit Profile</a>
             <a class="dropdown-item" href="{% url 'destination:change_password' %}">Change Password</a>
           </div>
         </li>
