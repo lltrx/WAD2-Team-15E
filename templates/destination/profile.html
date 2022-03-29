@@ -15,26 +15,29 @@ Your profile
     <h3>Welcome {{user.username}}!</h3>
 
 
-    <div class="card" style="width: 18rem;">
+    <div class="container">
     {% if user.userprofile.picture %}
-        <img src="{{ user_profile.picture.url }}">
+        <img src="{{ user_profile.picture.url }}" class="pro-img">
     {% else %}
         <img src="{% static 'images/user_pic_placeholder.png' %}">
     {% endif %}
 
-    <h5 class="card-title">About me</h5> 
+    <hr />
+    <h5>About me</h5> 
     {% if user_profile.about %}
-    <div class="card-body">
-        <p class="card-text">{{ user_profile.about }}</p>
+    <div>
+        <p >{{ user_profile.about }}</p>
     {% else %}
-        <p class="card-text">This is about me!</p>
+        <p >This is about me!</p>
    
     {% endif %}
   
     </div>
     </div>
     {% if user_destinations %}
-    <div class="card" style="width: 18rem;">
+    <hr /
+    <div class="container">
+    
        <h5>User's destinations</h5>
 
            {% for dest in user_destinations %}
@@ -46,6 +49,6 @@ Your profile
             {% endfor %}
     </div>
     {% endif %}
-
+</div>
 
 {% endblock%}

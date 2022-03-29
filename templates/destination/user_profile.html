@@ -10,36 +10,36 @@
 {% block body_block %}
 <div id="user-profile">
     
-    
+    <div class="container">
     <h1>{{ target_user.username }}'s Profile</h1>
 
     {% if target_user.userprofile.picture %}
-        <img src="{{ target_user.userprofile.picture.url }}">
+        <img src="{{ target_user.userprofile.picture.url }}" class="pro-img">
     {% else %}
         <img src="{% static 'images/user_pic_placeholder.png' %}">
     {% endif %}
-
+        <hr />
     <h5>About me</h5> 
     {% if target_user.about %}
         <p>{{ target_user.about }}</p>
     {% else %}
         <p>This is about me!</p>
     {% endif %}
-
+    <hr />
+</div>
     {% if user_destinations %}
+    <div class="container">
        <h5>User's destinations</h5>
-       <div id="destination-card-query">
+     
            {% for dest in user_destinations %}
-              <div class="destination-card">
+             
                 <a href="{% url 'destination:show_destination' dest.slug %}"><h3>{{ dest.name }}</h3></a>
                 <p>{{ dest.description }}</p>
                 {% if dest.image %}
-                  <img src="{{ dest.image.url }}">
+                  <img src="{{ dest.image.url }}" class="dest-img">
                 {% endif %}
-              </div>
             {% endfor %}
-       </div>
     {% endif %}
+</div>
 
-<div>
 {% endblock%}

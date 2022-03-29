@@ -150,11 +150,21 @@ def show_destination(request, destination_name_slug):
     try:
         destination = Destination.objects.get(slug=destination_name_slug)
         context_dict['destination'] = destination
+        
         total_likes = destination.total_likes()
         context_dict['total_likes'] = total_likes
+        
         total_rating = destination.total_rating()
         context_dict['total_rating'] = total_rating
-
+        
+        liked = False
+        if request.user.is_authenticated:
+            if request.user in destination.likes.all():
+                liked = True
+        
+                 
+        context_dict['liked'] = liked
+         
         if request.method == "POST":
             form = CommentForm(request.POST)
             if form.is_valid():
@@ -210,7 +220,13 @@ def edit_destination(request, destination_name_slug):
 @login_required
 def like_destination(request, destination_name_slug):
     destination = Destination.objects.get(slug=destination_name_slug)
-    destination.likes.add(request.user)
+    liked = False
+    if request.user in destination.likes.all():
+        destination.likes.remove(request.user)
+        liked = False
+    else:
+        destination.likes.add(request.user)
+        liked = True
     return redirect(reverse('destination:show_destination', kwargs={'destination_name_slug':destination_name_slug}))
 
 @login_required

@@ -36,63 +36,89 @@ Unknown destination
     <a href="{% url 'destination:user_profile' destination.author %}">view the author's profile</a>
     {% endif %}
 
-
+    
+    {% if liked %}
     <form action="{% url 'destination:like_destination' destination.slug %}" method="POST" class="like">
         {% csrf_token %}
-        <button type="submit" , name="post_id" , value="{{ post.id }}" class="like-btn"><i class="fa-solid fa-heart"></i></button>
-        {{ total_likes }}
+        <button type="submit" name="post_id" value="{{ post.id }}" class="btn btn-outline-dark">
+            <span class="material-icons">
+                thumb_down_off_alt
+                </span>
+            Unlike</button>
+        {{ total_likes }} likes
     </form>
-</div>
-<div class="card-comment">
-    <div class="card-header">
-        <h3>Comments:</h3>
-    </div>
-
+    {% else %}
+    <form action="{% url 'destination:like_destination' destination.slug %}" method="POST" class="like">
+        {% csrf_token %}
+        <button type="submit" name="post_id" value="{{ post.id }}" class="btn btn-outline-dark">
+            <span class="material-icons">
+                thumb_up_off_alt
+                </span>
+            Like</button>
+        {{ total_likes }} likes
+    
+    </form>
+    {% endif %}
+    <div class="card-comment">
+        <div class="card-header">
+            <h3>Comments</h3>
+        </div>
+        
     {% if not destination.comments.all %}
     <div class="card-body">
         No comments yet..
     </div>
     {% else %}
-    {% for comment in destination.comments.all %}
-    <div class="card-body">
-        {% if comment.user.userprofile.picture %}
-        <img src="{{ comment.user.user_profile.picture.url }}" class="comment-img">
-        <p>{{ comment.user.user_profile.picture.url }}</p>
-        {% else %}
-        <img src="{% static 'images/user_pic_placeholder.png' %}" class="comment-img">
-        {% endif %}
-        <strong><a href="{% url 'destination:user_profile' comment.user %}">{{ comment.user }}</a>
-            On {{ comment.created_date }} </strong>
-        <br />
-        {% if comment.user == request.user %}
-        <form action="{% url 'destination:delete_comment' comment.pk %}" method="POST">
-            {% csrf_token %}
-            <button type="submit" class="btn btn-outline-dark red-button">Delete comment</button>
-        </form>
-        {% endif %}
-        <blockquote class="blockquote mb-0">
-            <p> {{ comment.text }} </p>
-            <footer> Rate: {{ comment.rate }} </footer>
+        {% for comment in destination.comments.all %}
+        <div class="card-body">
+                {% if comment.user.userprofile.picture %}
+                    <img src="{{ comment.user.user_profile.picture.url }}" class="comment-img">
+                    
+                {% else %}
+                    <img src="{% static 'images/user_pic_placeholder.png' %}" class="comment-img">
+                {% endif %}
+                
+            <strong><a href="{% url 'destination:user_profile' comment.user %}">{{ comment.user }}</a> 
+                On {{ comment.created_date }} </strong>
+                <br />
+                
+                <blockquote class="blockquote mb-0">
+            <p class="comment-text"> {{ comment.text }} </p>
+            <footer>  Rate: {{ comment.rate }} </footer>
         </blockquote>
+        {% if comment.user == request.user %}
+                <form action="{% url 'destination:delete_comment' comment.pk %}" method="POST">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-outline-dark red-button"><span class="material-icons">
+                        delete_outline
+                        </span>Delete comment</button>
+                </form>
+                {% endif %}
     </div>
-</div>
-{% endfor %}
-{% endif %}
-<br />
-{%if user.is_authenticated %}
-</p>
-<button class="btn btn-primary" type="buttopon" data-toggle="collapse" data-target="#collapseExample"
-    aria-expanded="false" aria-controls="collapseExample">
-    Add comment
-</button>
-</p>
-<div class="collapse" id="collapseExample">
-    <div class="comment-card-body">
+    </div>
+    <hr />
+        {% endfor %}
+    {% endif %} 
+    <br />
+    {%if user.is_authenticated %}
+    </p>
+    <button class="btn btn-outline-dark" type="buttopon" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+        <span class="material-icons">
+            chat_bubble_outline
+            </span>
+        Add comment
+      </button>
+    </p>
+    <div class="collapse" id="collapseExample">
+        <div class="comment-card-body">
         <form method="post" action="{% url 'destination:show_destination' destination.slug %}">
             {% csrf_token %}
             {{ form.as_table }}
 
-            <button type="submit" class="btn btn-outline-dark">Submit</button>
+            <button type="submit" class="btn btn-outline-dark">
+                <span class="material-icons">
+                    send
+                    </span>Submit</button>
         </form>
     </div>
 </div>

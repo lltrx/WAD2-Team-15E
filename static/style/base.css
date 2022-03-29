@@ -4,12 +4,10 @@ body{
     font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     background-color: #1a1a1a;
     color: rgba(255, 255, 255, 0.87);
-
 }
 
 
 nav {
-  z-index: 100;
   height: 70px;
   width: 100%;
   text-align: center;
@@ -61,8 +59,8 @@ nav {
 }
 
 .red-button {
-  color: white;
-  background-color: red;
+  color: rgb(0, 0, 0);
+
 }
 
 .list-group {
@@ -72,6 +70,7 @@ nav {
   margin: 20px auto;
 }
 .card {
+
   background-color: #242424;
   width: 50rem;
   padding: 30px;
@@ -81,11 +80,18 @@ nav {
 
 .card-title {
   color: #42b883;
+  width: 40rem;
+  margin: 0 auto;
+  margin-bottom: 20px;
+}
+
+.card-title {
   font-size: 30px;
   font-weight: bold; 
 }
 
 .card-text {
+
   color: rgba(255, 255, 255, 0.87);
   font-size: 20px;
 }
@@ -106,6 +112,8 @@ nav {
   margin-top: 20px;
   border: 1px solid #42b883;
   border-radius: 10px;
+
+
 }
 .view:hover {
   text-decoration: none;
@@ -259,4 +267,21 @@ nav {
 .destination-body {
   max-width: 1000px;
   margin: 0 auto;
+}
+.material-icons {
+  font-size: medium;
+  height: 8%;
+  width: 100%;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pro-img {
+  width: 50%;  
+}
+
+.comment-text {
+  display: block;
 }
