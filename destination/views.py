@@ -162,7 +162,6 @@ def show_destination(request, destination_name_slug):
                 comment.destination = destination
                 comment.user = request.user
                 comment.save()
-                print("We did it!")
                 return redirect('destination:index')
         
         form = CommentForm()
@@ -215,16 +214,24 @@ def like_destination(request, destination_name_slug):
     return redirect(reverse('destination:show_destination', kwargs={'destination_name_slug':destination_name_slug}))
 
 @login_required
+def delete_destination(request, destination_name_slug):
+    destination = Destination.objects.get(slug=destination_name_slug)
+    destination.delete()
+    return redirect(reverse('destination:destination_menu'))
+
+@login_required
 def comment_destination(request, destination_name_slug):
     destination = Destination.objects.get(slug=destination_name_slug)
     print(destination)
     return redirect(reverse('destination:show_destination', kwargs={'destination_name_slug':destination_name_slug}))
 
 @login_required
-def delete_destination(request, destination_name_slug):
-    destination = Destination.objects.get(slug=destination_name_slug)
-    destination.delete()
-    return redirect(reverse('destination:destination_menu'))
+def delete_comment(request, comment_pk):
+    comment = Comment.objects.get(pk=comment_pk)
+    destination = comment.destination
+    destination_name_slug = destination.slug
+    comment.delete()
+    return redirect(reverse('destination:show_destination', kwargs={'destination_name_slug':destination_name_slug}))
 
 '''
 def get_server_side_cookie(request, cookie, default_val=None):

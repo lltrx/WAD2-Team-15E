@@ -62,6 +62,12 @@
             <strong><a href="{% url 'destination:user_profile' comment.user %}">{{ comment.user }}</a> 
                 On {{ comment.created_date }} </strong>
                 <br />
+                {% if comment.user == request.user %}
+                <form action="{% url 'destination:delete_comment' comment.pk %}" method="POST">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-outline-dark red-button">Delete comment</button>
+                </form>
+                {% endif %}
                 <blockquote class="blockquote mb-0">
             <p> {{ comment.text }} </p>
             <footer>  Rate: {{ comment.rate }} </footer>

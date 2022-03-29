@@ -14,6 +14,7 @@ urlpatterns = [
     path('destination/<slug:destination_name_slug>/like_destination/', views.like_destination, name='like_destination'),
     path('destination/<slug:destination_name_slug>/delete_destination/', views.delete_destination, name='delete_destination'),
     path('destination/<slug:destination_name_slug>/comment_destination/', views.comment_destination, name='comment_destination'),
+    path('delete_comment/<str:comment_pk>/', views.delete_comment, name='delete_comment'),
     path('add_destination/', views.add_destination, name='add_destination'),
     path('register/', views.register, name='register'),
     path('login/', views.user_login, name='login'),
