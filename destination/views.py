@@ -79,83 +79,6 @@ def user_profile(request, username):
     context_dict['user_destinations'] = user_destinations
     return render(request, 'destination/user_profile.html', context_dict)
 
-@login_required
-def change_password(request):
-    if request.method == 'POST':
-        form = PasswordChangeForm(data=request.POST, user=request.user)
-        if form.is_valid():
-            form.save()
-            update_session_auth_hash(request, form.user)
-            return redirect(reverse('destination:my_profile'))
-    else:
-        form = PasswordChangeForm(user=request.user)
-        context_dict = {'form': form}
-        return render(request, 'destination/change_password.html', context=context_dict)
-        
-
-def show_destination(request, destination_name_slug):
-    context_dict = {}
-    try:
-        
-        destination = Destination.objects.get(slug=destination_name_slug)
-        context_dict['destination'] = destination
-        total_likes = destination.total_likes()
-        context_dict['total_likes'] = total_likes
-        total_rating = destination.total_rating()
-        context_dict['total_rating'] = total_rating
-        if request.method == "POST":
-            form = CommentForm(request.POST)
-            if form.is_valid():
-                comment = form.save(commit=False)
-                comment.destination = destination
-                comment.user = request.user
-                comment.save()
-                context_dict['form'] = form 
-                return redirect(reverse('destination:show_destination', kwargs={'destination_name_slug': destination_name_slug}))
-        else:
-            form = CommentForm()
-            context_dict['form'] = form 
-            return redirect(reverse('destination:show_destination', kwargs={'destination_name_slug': destination_name_slug}))
-            
-    except Destination.DoesNotExist:
-        context_dict['destination'] = None
-        return render(request, 'destination/destination.html', context=context_dict)
-    finally:
-        return render(request, 'destination/destination.html', context=context_dict)
-
-
-@login_required
-def add_destination(request):
-    if request.method == 'POST':
-        form = DestinationForm(request.POST, request.FILES)
-        if form.is_valid():
-            form.save(request, commit=True)
-            return redirect(reverse('destination:index'))
-        else:
-            print(form.errors)
-    else:
-        form = DestinationForm()
-    return render(request, 'destination/add_destination.html', {'form': form})
-
-@login_required
-def edit_destination(request, destination_name_slug):
-    context_dict = {}
-
-    destination = Destination.objects.get(slug=destination_name_slug)
-    context_dict['instance'] = destination
-    print(destination.destination_type)
-    if request.method == 'POST':
-        form = DestinationForm(request.POST, request.FILES, instance=destination, initial={'destination_type': destination.destination_type })
-        
-        if form.is_valid():
-            new = form.save(request)
-            return redirect(reverse('destination:show_destination', kwargs={'destination_name_slug':new.slug}))
-        
-    else:
-        form = DestinationForm(request.FILES, instance=destination, initial={'destination_type': destination.destination_type })
-        context_dict['form'] = form
-        return render(request, 'destination/edit_destination.html', context=context_dict)
-
 def register(request):
     registered = False
     if request.method == 'POST':
@@ -209,6 +132,83 @@ def user_logout(request):
     return redirect(reverse('destination:index'))
 
 @login_required
+def change_password(request):
+    if request.method == 'POST':
+        form = PasswordChangeForm(data=request.POST, user=request.user)
+        if form.is_valid():
+            form.save()
+            update_session_auth_hash(request, form.user)
+            return redirect(reverse('destination:my_profile'))
+    else:
+        form = PasswordChangeForm(user=request.user)
+        context_dict = {'form': form}
+        return render(request, 'destination/change_password.html', context=context_dict)
+        
+
+def show_destination(request, destination_name_slug):
+    context_dict = {}
+    try:
+        destination = Destination.objects.get(slug=destination_name_slug)
+        context_dict['destination'] = destination
+        total_likes = destination.total_likes()
+        context_dict['total_likes'] = total_likes
+        total_rating = destination.total_rating()
+        context_dict['total_rating'] = total_rating
+
+        if request.method == "POST":
+            form = CommentForm(request.POST)
+            if form.is_valid():
+                comment = form.save(commit=False)
+                comment.destination = destination
+                comment.user = request.user
+                comment.save()
+                print("We did it!")
+                return redirect('destination:index')
+        
+        form = CommentForm()
+        
+        context_dict['form'] = form 
+            
+    except Destination.DoesNotExist:
+        context_dict['destination'] = None
+        return render(request, 'destination/destination.html', context=context_dict)
+    finally:
+        return render(request, 'destination/destination.html', context=context_dict)
+
+
+@login_required
+def add_destination(request):
+    if request.method == 'POST':
+        form = DestinationForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save(request, commit=True)
+            return redirect(reverse('destination:index'))
+        else:
+            print(form.errors)
+    else:
+        form = DestinationForm()
+    return render(request, 'destination/add_destination.html', {'form': form})
+
+@login_required
+def edit_destination(request, destination_name_slug):
+    context_dict = {}
+
+    destination = Destination.objects.get(slug=destination_name_slug)
+    context_dict['instance'] = destination
+    print(destination.destination_type)
+    if request.method == 'POST':
+        form = DestinationForm(request.POST, request.FILES, instance=destination, initial={'destination_type': destination.destination_type })
+        
+        if form.is_valid():
+            new = form.save(request)
+            return redirect(reverse('destination:show_destination', kwargs={'destination_name_slug':new.slug}))
+        
+    else:
+        form = DestinationForm(request.FILES, instance=destination, initial={'destination_type': destination.destination_type })
+        context_dict['form'] = form
+        return render(request, 'destination/edit_destination.html', context=context_dict)
+
+@login_required
 def like_destination(request, destination_name_slug):
     destination = Destination.objects.get(slug=destination_name_slug)
     destination.likes.add(request.user)
@@ -217,7 +217,7 @@ def like_destination(request, destination_name_slug):
 @login_required
 def comment_destination(request, destination_name_slug):
     destination = Destination.objects.get(slug=destination_name_slug)
-    
+    print(destination)
     return redirect(reverse('destination:show_destination', kwargs={'destination_name_slug':destination_name_slug}))
 
 @login_required

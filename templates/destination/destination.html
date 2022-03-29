@@ -79,7 +79,7 @@
     </p>
     <div class="collapse" id="collapseExample">
         <div class="comment-card-body">
-        <form method="post" action=".">
+        <form method="post" action="{% url 'destination:show_destination' destination.slug %}">
              {% csrf_token %}
              {{ form.as_table }}
 
