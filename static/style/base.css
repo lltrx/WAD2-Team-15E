@@ -36,13 +36,11 @@ nav {
   background-color: red;
 }
 
-
 .list-group {
   text-align: center;
   align-items: center;
   justify-content: center;
-  margin: 0 auto;
-  height: 80%;
+  margin: 20px auto;
 }
 .card {
   background-color: #A0522D;
@@ -52,8 +50,7 @@ nav {
 .card-title {
   color: rgb(255, 255, 255);
   font-size: 30px;
-  font-weight: bold;
-  
+  font-weight: bold; 
 }
 
 .card-text {

@@ -108,23 +108,20 @@ def show_destination(request, destination_name_slug):
             if form.is_valid():
                 comment = form.save(commit=False)
                 comment.destination = destination
-                comment.author = request.user
+                comment.user = request.user
                 comment.save()
+                context_dict['form'] = form 
                 return redirect(reverse('destination:show_destination', kwargs={'destination_name_slug': destination_name_slug}))
         else:
             form = CommentForm()
+            context_dict['form'] = form 
+            return redirect(reverse('destination:show_destination', kwargs={'destination_name_slug': destination_name_slug}))
             
-        context_dict['form'] = form 
     except Destination.DoesNotExist:
         context_dict['destination'] = None
         return render(request, 'destination/destination.html', context=context_dict)
     finally:
         return render(request, 'destination/destination.html', context=context_dict)
-'''
-    if request.session.test_cookie_worked():
-        print("TEST COOKIE WORKED!")
-        request.session.delete_test_cookie()
-'''
 
 
 @login_required
@@ -215,6 +212,12 @@ def user_logout(request):
 def like_destination(request, destination_name_slug):
     destination = Destination.objects.get(slug=destination_name_slug)
     destination.likes.add(request.user)
+    return redirect(reverse('destination:show_destination', kwargs={'destination_name_slug':destination_name_slug}))
+
+@login_required
+def comment_destination(request, destination_name_slug):
+    destination = Destination.objects.get(slug=destination_name_slug)
+    
     return redirect(reverse('destination:show_destination', kwargs={'destination_name_slug':destination_name_slug}))
 
 @login_required

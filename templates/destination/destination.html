@@ -43,7 +43,7 @@
     
     <div class="card-comment">
         <div class="card-header">
-    <h3>Comments</h3>
+            <h3>Comments</h3>
         </div>
         
     {% if not destination.comments.all %}
@@ -53,12 +53,13 @@
     {% else %}
         {% for comment in destination.comments.all %}
         <div class="card-body">
-                {% if user.userprofile.picture %}
-                    <img src="{{ user_profile.picture.url }}" class="comment-img">
+                {% if comment.user.userprofile.picture %}
+                    <img src="{{ comment.user.user_profile.picture.url }}" class="comment-img">
+                    <p>{{ comment.user.user_profile.picture.url }}</p>
                 {% else %}
                     <img src="{% static 'images/user_pic_placeholder.png' %}" class="comment-img">
                 {% endif %}
-            <strong> {{ comment.user }} 
+            <strong><a href="{% url 'destination:user_profile' comment.user %}">{{ comment.user }}</a> 
                 On {{ comment.created_date }} </strong>
                 <br />
                 <blockquote class="blockquote mb-0">
@@ -82,7 +83,7 @@
              {% csrf_token %}
              {{ form.as_table }}
 
-                <button type="submit" class="btn btn-outline-dark">Submit</button>
+            <button type="submit" class="btn btn-outline-dark">Submit</button>
         </form>
         </div>
     </div>

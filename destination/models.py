@@ -36,9 +36,12 @@ class Destination(models.Model):
     def total_rating(self):
         comments = Comment.objects.filter(destination=self)
         rating_total = 0
-        for rating in comments:
-            rating_total += rating.rate
-        return rating_total/comments.count()
+        if comments.count() == 0:
+            return "No ratings yet"
+        else:
+            for rating in comments:
+                rating_total += rating.rate
+            return round(rating_total/comments.count(), 2)
 
     class Meta:
         verbose_name_plural = 'Destinations'
