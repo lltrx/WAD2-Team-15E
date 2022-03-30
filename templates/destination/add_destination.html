@@ -9,7 +9,9 @@ Add a destination
 
     <form id="destination_form" method="post" enctype="multipart/form-data" action="{% url 'destination:add_destination' %}">
         {% csrf_token %}
-        
+        {% if error %}
+            {{ error }}
+        {% endif %}
         <div class="form-group">
             <label for="title">Title:</label>
             <input type="text" name="name" id="name" required>

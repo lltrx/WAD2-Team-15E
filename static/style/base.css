@@ -52,7 +52,7 @@ nav {
 }
 
 .logo{
-  background: url("/path") no-repeat; 
+  background: no-repeat; 
   width: auto; 
   height: 35px; 
   display: block; 

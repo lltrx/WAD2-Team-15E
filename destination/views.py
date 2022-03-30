@@ -81,6 +81,7 @@ def user_profile(request, username):
 
 def register(request):
     registered = False
+    context_dict = {}
     if request.method == 'POST':
         user_form = RegistrationForm(request.POST)
         user_profile_form = UserProfileForm(request.POST, request.FILES )
@@ -102,10 +103,16 @@ def register(request):
             
         else:
             print(user_form.errors, user_profile_form.errors)
+            context_dict['user_error'] = user_form.errors
+            context_dict['user_profile_error'] = user_profile_form.errors
     else:
         user_form = RegistrationForm()
         user_profile_form = UserProfileForm()
-    return render(request, 'destination/register.html', {'user_form': user_form, 'user_profile_form': user_profile_form, 'registered': registered})
+
+    context_dict['user_form'] = user_form
+    context_dict['user_profile_form'] = user_profile_form
+    context_dict['registered'] = registered
+    return render(request, 'destination/register.html', context_dict)
 
 def user_login(request):
     if request.method == 'POST':
@@ -186,16 +193,19 @@ def show_destination(request, destination_name_slug):
 
 @login_required
 def add_destination(request):
+    context_dict = {}
     if request.method == 'POST':
         form = DestinationForm(request.POST, request.FILES)
         if form.is_valid():
-            form.save(request, commit=True)
-            return redirect(reverse('destination:index'))
+            new = form.save(request, commit=True)
+            return redirect(reverse('destination:show_destination', kwargs={'destination_name_slug':new.slug}))
         else:
             print(form.errors)
+            context_dict['error'] = form.error
     else:
         form = DestinationForm()
-    return render(request, 'destination/add_destination.html', {'form': form})
+    context_dict['form'] = form
+    return render(request, 'destination/add_destination.html', context_dict)
 
 @login_required
 def edit_destination(request, destination_name_slug):
