@@ -5,12 +5,17 @@ Homepage
 {% endblock %} 
 
 {% block body_block %}
-<div>
-  {% if user.is_authenticated %}
-   <h2> Welcome back {{ user.username }}!</h2> 
-  {% else %}
-    hey there partner!
-  {% endif %}
+<div id="front-page-banner">
+	<div id="banner-content">
+		<img src="{% static 'images/logo.png' %}" alt="logo" class="logo" />
+		{% if user.is_authenticated %}
+			<h2>Welcome back {{ user.username }}!</h2> 
+		{% else %}
+	    	<h2>Welcome!</h2>
+		{% endif %}
+		<p id="banner-scroll">explore <span class="material-icons">expand_more</span></p>
+	</div>
+	<div id="banner-filter"></div>
 </div>
 
 <div>

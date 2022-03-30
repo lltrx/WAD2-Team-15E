@@ -60,6 +60,50 @@ nav {
   text-indent: -9999px;
 }
 
+/* index page banner */
+
+#front-page-banner {
+  background: url('/static/images/front-page-image.jpg') no-repeat;
+  background-size: cover;
+  position: relative;
+  width: 100%;
+  height: 600px;
+}
+
+#banner-filter {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+#banner-content {
+  z-index: 5;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%
+}
+
+#front-page-banner .logo{
+  height: 70px;
+  margin: 50px 0;
+}
+
+#front-page-banner h2{
+  font-weight: bold;
+}
+
+#front-page-banner p{
+  margin-top: 30px;
+  font-size: 60%;
+}
 
 
 .red-button {
