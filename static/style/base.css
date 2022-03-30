@@ -6,6 +6,7 @@ body{
     color: rgba(255, 255, 255, 0.87);
 }
 
+/* navigation styling */
 
 nav {
   height: 70px;
@@ -49,6 +50,7 @@ nav {
 .dropdown-hover:hover {
   color: rgba(235, 235, 235, .6) !important;
 }
+
 .logo{
   background: url("/path") no-repeat; 
   width: auto; 
@@ -57,6 +59,8 @@ nav {
   margin: 0 20px;
   text-indent: -9999px;
 }
+
+
 
 .red-button {
   color: rgb(0, 0, 0);
@@ -120,7 +124,6 @@ nav {
   color: #42b883;
 }
 
-
 .dest-img {
   max-width: 100%;
   max-height: 100%;
@@ -180,6 +183,7 @@ nav {
   position: relative;
   top: 100px;
 }
+
 @keyframes enter-up{
 
   to {

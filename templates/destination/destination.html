@@ -3,11 +3,11 @@
 {% block title %} Destinations {% endblock %}
 
 {% block title_block %}
-{% if destination %}
-{{ destination.name }}
-{% else %}
-Unknown destination
-{% endif %}
+    {% if destination %}
+        {{ destination.name }}
+    {% else %}
+        Unknown destination
+    {% endif %}
 {% endblock %}
 
 {% block body_block %}
@@ -72,8 +72,8 @@ Unknown destination
         {% for comment in destination.comments.all %}
         <div class="card-body">
                 {% if comment.user.userprofile.picture %}
-                    <img src="{{ comment.user.user_profile.picture.url }}" class="comment-img">
-                    
+                    <img src="{{ comment.user.userprofile.picture.url }}" class="comment-img">
+                    {{ comment.user.userprofile.picture }}
                 {% else %}
                     <img src="{% static 'images/user_pic_placeholder.png' %}" class="comment-img">
                 {% endif %}

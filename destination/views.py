@@ -151,6 +151,16 @@ def show_destination(request, destination_name_slug):
         destination = Destination.objects.get(slug=destination_name_slug)
         context_dict['destination'] = destination
         
+        if request.method == "POST":
+            form = CommentForm(request.POST)
+            if form.is_valid():
+                comment = form.save(commit=False)
+                comment.destination = destination
+                comment.user = request.user
+                comment.save()
+        
+        form = CommentForm()
+        
         total_likes = destination.total_likes()
         context_dict['total_likes'] = total_likes
         
@@ -164,17 +174,6 @@ def show_destination(request, destination_name_slug):
         
                  
         context_dict['liked'] = liked
-         
-        if request.method == "POST":
-            form = CommentForm(request.POST)
-            if form.is_valid():
-                comment = form.save(commit=False)
-                comment.destination = destination
-                comment.user = request.user
-                comment.save()
-                return redirect('destination:index')
-        
-        form = CommentForm()
         
         context_dict['form'] = form 
             
