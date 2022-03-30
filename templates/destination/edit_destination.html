@@ -43,7 +43,7 @@ Edit destination
             <label for="replace_image">replace image</label>
             <input type="file" name="image" id="image" value="{{ instance.image }}">
             <br />
-            <button type="submit" class="btn btn-outline-dark">
+            <button type="submit" class="edit-button btn btn-outline-dark">
                 <span class="material-icons">
                     edit
                     </span>Edit</button>
@@ -52,7 +52,7 @@ Edit destination
     <br />
     <form action="{% url 'destination:delete_destination' instance.slug %}" method="POST">
         {% csrf_token %}
-        <button type="submit" class="btn btn-outline-dark red-button">
+        <button type="submit" class="delete-button btn btn-outline-dark">
             <span class="material-icons">
                 delete_outline
                 </span>Delete destination</button>

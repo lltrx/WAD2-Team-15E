@@ -40,7 +40,7 @@ Unknown destination
     {% if liked %}
     <form action="{% url 'destination:like_destination' destination.slug %}" method="POST" class="like">
         {% csrf_token %}
-        <button type="submit" name="post_id" value="{{ post.id }}" class="btn btn-outline-dark">
+        <button type="submit" name="post_id" value="{{ post.id }}" class="unlike-button btn btn-outline-dark">
             <span class="material-icons">
                 thumb_down_off_alt
                 </span>
@@ -50,7 +50,7 @@ Unknown destination
     {% else %}
     <form action="{% url 'destination:like_destination' destination.slug %}" method="POST" class="like">
         {% csrf_token %}
-        <button type="submit" name="post_id" value="{{ post.id }}" class="btn btn-outline-dark">
+        <button type="submit" name="post_id" value="{{ post.id }}" class="like-button btn btn-outline-dark">
             <span class="material-icons">
                 thumb_up_off_alt
                 </span>
@@ -65,7 +65,7 @@ Unknown destination
         </div>
         
     {% if not destination.comments.all %}
-    <div class="card-body">
+    <div class="card-body"> 
         No comments yet..
     </div>
     {% else %}
@@ -89,7 +89,7 @@ Unknown destination
         {% if comment.user == request.user %}
                 <form action="{% url 'destination:delete_comment' comment.pk %}" method="POST">
                     {% csrf_token %}
-                    <button type="submit" class="btn btn-outline-dark red-button"><span class="material-icons">
+                    <button type="submit" class="delete-button btn btn-outline-dark"><span class="material-icons">
                         delete_outline
                         </span>Delete comment</button>
                 </form>
@@ -102,28 +102,55 @@ Unknown destination
     <br />
     {%if user.is_authenticated %}
     </p>
-    <button class="btn btn-outline-dark" type="buttopon" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+    <button class="comment-button btn btn-outline-dark" type="button" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">
         <span class="material-icons">
             chat_bubble_outline
             </span>
         Add comment
       </button>
     </p>
-    <div class="collapse" id="collapseExample">
-        <div class="comment-card-body">
-        <form method="post" action="{% url 'destination:show_destination' destination.slug %}">
-            {% csrf_token %}
-            {{ form.as_table }}
+    <form method="post" action="{% url 'destination:show_destination' destination.slug %}">
+    <div class="modal" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="exampleModalLabel">Add comment</h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
 
-            <button type="submit" class="btn btn-outline-dark">
-                <span class="material-icons">
-                    send
-                    </span>Submit</button>
-        </form>
-    </div>
-</div>
+                  {% csrf_token %}
+                  <label class="control-label" for="id_text">Text:</label>
+                  <br />
+                  <textarea name="text" cols="40" rows="10" required="" id="id_text" spellcheck="true" class="form-control"></textarea>
+                  <hr />
+                  <label for="id_rate">Rate:</label>
+                  <select name="rate" id="id_rate">
+                    <option value="1">1 - Not good</option>
+                  
+                    <option value="2">2 - Average</option>
+                  
+                    <option value="3">3 - Good</option>
+                  
+                    <option value="4">4 - Very good</option>
+                  
+                    <option value="5">5 - Excellent</option>
+                  
+                  </select>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+              <button type="submit" class="comment-button btn btn-outline-dark">Send comment</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
 {% endif %}
-
+<script src="/static/style/comment.js"></script>
 
 {%if user.is_authenticated %}
 

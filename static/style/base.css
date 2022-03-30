@@ -285,3 +285,70 @@ nav {
 .comment-text {
   display: block;
 }
+
+.modal-content {
+  background-color: #1a1a1a;
+}
+
+.close {
+  color: white;
+}
+
+.comment-button {
+  background-color:#1a1a1a;
+  border-radius: 20px;
+  color: #42b883;
+  border: none;
+  width: 200px;
+}
+.comment-button:first-child {
+  margin-top: 15px;
+}
+
+.delete-button {
+  background-color:#1a1a1a;
+  border-radius: 20px;
+  color: #d61313;
+  border: none;
+  width: 200px;
+  
+}
+.delte-button:first-child {
+  margin-top: 15px;
+}
+
+.like-button {
+  background-color:#1a1a1a;
+  border-radius: 20px;
+  color: #42b883;
+  border: none;
+  width: 200px;
+  
+}
+.delte-button:first-child {
+  margin-top: 15px;
+}
+
+.unlike-button {
+  background-color:#1a1a1a;
+  border-radius: 20px;
+  color: #d61313;
+  border: none;
+  width: 200px;
+  
+}
+.delte-button:first-child {
+  margin-top: 15px;
+}
+
+.edit-button {
+  background-color:#1a1a1a;
+  border-radius: 20px;
+  color: #42b883;
+  border: none;
+  width: 200px;
+  
+}
+.edit-button:first-child {
+  margin-top: 15px;
+}
