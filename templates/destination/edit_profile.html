@@ -1,52 +1,45 @@
-{% extends 'destination/base.html' %} {% load staticfiles %} 
+{% extends 'destination/base.html' %} {% load staticfiles %}
 
 
 {% block title_block %}
 Edit Profile
-{% endblock %} 
+{% endblock %}
 
-    
+
 
 {% block body_block %}
 
-    <form method="post" enctype="multipart/form-data">
-        {% csrf_token %}							
-				<div class="form-group">
-					<label for="username">Username</label>
-					<input type="text" name="username" required="" id="id_username" {{ user_form.username}}
-				</div>
-				<div class="form-group">
-					<label for="first_name">First Name</label>
-					<input type="text" name="first_name" id="id_first_name" {{ user_form.first_name}}
+<form id="user_form" class="form" method="post" enctype="multipart/form-data">
+	{% csrf_token %}
+	<div class="form-group">
+		<label for="username">Username:</label>
+		{{ user_form.username}}
+	</div>
+	<div class="form-group">
+		<label for="first_name">First Name:</label>
+		{{ user_form.first_name}}
+	</div>
+	<div class="form-group">
+		<label for="last_name">Last Name:</label>
+		{{ user_form.last_name}}
+	</div>
+	<div class="form-group">
+		<label for="email">Email:</label>
+		{{ user_form.email}}
+	</div>
+	<div class="form-group">
+		<label for="picture">New picture:</label>
+		<input type="file" name="picture" id="picture" />
+	</div>
+	<div class="form-group">
+		<label for="about">About:</label>
+		{{ user_profile_form.about}}
+	</div>
+	<div class="form-group">
+		<button type="submit" class="edit-button btn btn-outline-dark"><i class="fa-solid fa-pen-to-square"></i>Save</button>
 
-				</div>
-				<div class="form-group">
-					<label for="last_name">Last Name</label>
-					<input type="text" name="last_name" id="id_last_name" {{ user_form.last_name}}
-					
-				</div>
-				<div class="form-group">
-					<label for="email">Email</label>
-					<input type="text" name="email" id="id_email" {{ user_form.email}}
-					
-				</div>
-				<div class="form-group">
-					<label for="picture">New picture</label>
-					<input type="file" name="picture" id="picture" />
-				</div>
-                <div class="form-group">
-					<label for="about">About</label>
-                    <input type="text" name="about" id="id_about" {{ user_profile_form.about}}
-                </div>
-                <div class="form-group">
-        <button type="submit" class="edit-button btn btn-outline-dark">
-			<span class="material-icons">
-				edit
-				</span>Edit</button>
-		</div>
+	</div>
 
-		
-        </div>
-    </form>
-  
+</form>
+
 {% endblock%}

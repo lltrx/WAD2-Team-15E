@@ -17,11 +17,11 @@
 
     <br />
     {% if destination.author == request.user %}
-    <a href="{% url 'destination:edit_destination' destination.slug %}">Edit Destination</a><br />
+    <a href="{% url 'destination:edit_destination' destination.slug %}"><i style="font-size: 17px; margin-right: 10px;" class="fa-solid fa-pen-to-square"></i>Edit</a><br />
     {% endif %}
 
     {% if destination.image %}
-    <img src="{{ destination.image.url }}" class="dest-img">
+    <img style="margin-top:10px;" src="{{ destination.image.url }}" class="dest-img">
     {% endif %}
     <br />
     <br />
@@ -33,7 +33,7 @@
     <p class="dest-des">{{ destination.description }}</p>
 
     {% if destination.author != null %}
-    <a href="{% url 'destination:user_profile' destination.author %}">view the author's profile</a>
+    <a href="{% url 'destination:user_profile' destination.author %}">Author's Profile</a>
     {% endif %}
 
     

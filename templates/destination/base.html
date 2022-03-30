@@ -18,11 +18,12 @@
   </head>
 
 <body>
-  <nav class="navbar navbar-fixed-top navbar-expand-lg">
+  <nav class="navbar navbar-fixed-top navbar-expand-md">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <i class="fa-solid fa-bars"></i>
+    </button>
+    <a href="{% url 'destination:index' %}"><img src="{% static 'images/logo.png' %}" alt="logo" class="logo" /></a>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-
-      <a href="{% url 'destination:index' %}"><img src="{% static 'images/logo.png' %}" alt="logo" class="logo" /></a>
-
       <ul class="navbar-nav mr-auto">
         <li class="nav-item">
           <a class="nav-link green-hover" href="{% url 'destination:index' %}"><i style="position:relative; bottom: 1px;" class="icon fa-solid fa-house"></i>Home</a>

@@ -21,7 +21,19 @@ nav {
   top: 0;
   position: fixed;
   margin-bottom: 30px;
+  background:rgb(26,26,26);
 }
+#navbarSupportedContent {
+  z-index: 99;
+  border-radius: 10px;
+  background:rgb(26,26,26);
+}
+
+.fa-bars {
+  color: #42b883;
+  font-size:27px;
+}
+
 .dropdown-menu {
   background: #1a1a1a;
   border: 1px solid rgba(84, 84, 84, .48);
@@ -64,7 +76,7 @@ nav {
 
 #front-page-banner {
   background: url('/static/images/front-page-image.jpg') no-repeat;
-  background-size: contain;
+  background-size: cover;
   position: relative;
   width: 100%;
   height: 600px;
@@ -120,7 +132,7 @@ nav {
 .card {
 
   background-color: #242424;
-  width: 50rem;
+  width: 900px;
   padding: 30px;
   border-radius: 10px;
   opacity: 0;
@@ -128,7 +140,6 @@ nav {
 
 .card-title {
   color: #42b883;
-  width: 40rem;
   margin: 0 auto;
   margin-bottom: 20px;
 }
@@ -198,7 +209,7 @@ nav {
 }
 
 .dest-des {
-  font-size: 40px;
+  font-size: 30px;
   text-align: left;
   background:rgba(84, 84, 84, .48);
   padding: 20 40px;
@@ -266,24 +277,6 @@ nav {
   margin: 0 auto;
   padding: 20px;
   border-radius: 10px;
-}
-#user_form {
-  border: 1px solid rgba(84, 84, 84, .48);
-  width: 500px;
-  margin: 0 auto;
-  padding: 20px;
-  border-radius: 10px;
-}
-#user_form label {
-  margin-right: 5px;
-}
-#user_form input {
-  background: none;
-  border:  1px solid #42b883;
-  border-radius: 15px;
-  padding: 0 10px;
-  color:rgba(255, 255, 255, 0.87);
-  width: 250px;
 }
 
 #login_form label {
@@ -370,7 +363,7 @@ nav {
   border-radius: 20px;
   color: #42b883;
   border: none;
-  width: 200px;
+  width: 100px;
   
 }
 .delte-button:first-child {
@@ -390,7 +383,7 @@ nav {
 }
 
 .edit-button {
-  background-color:#1a1a1a;
+  background-color:rgba(84, 84, 84, .48);
   border-radius: 20px;
   color: #42b883;
   border: none;
@@ -400,9 +393,105 @@ nav {
 .edit-button:first-child {
   margin-top: 15px;
 }
+.edit-button i {
+  margin-right: 7px;
+}
 .icon {
   font-size: 20px;
   color: #42b883;
   margin-right:6px;
   margin-left: 8px;
+}
+
+.profile-body > h1 {
+  margin-bottom: 50px;
+  color: #42b883;
+}
+
+.profile-body img {
+  height: 300px;
+  margin: 30px 0;
+}
+.form {
+  border: 1px solid rgba(84, 84, 84, .48);
+  width: 500px;
+  margin: 0 auto;
+  padding: 20px;
+  padding-right: 60px;
+  border-radius: 10px;
+
+}
+.form label {
+  margin-right: 5px;
+}
+.form input {
+  background: none;
+  border:  1px solid #42b883;
+  border-radius: 15px;
+  padding: 0 10px;
+  color:rgba(255, 255, 255, 0.87);
+  width: 250px;
+}
+.form .form-group {
+  display: flex;
+  justify-content: end;
+}
+.form .form-group:last-child {
+  margin-right: 30px;
+}
+.change-password-body {
+  border: 1px solid rgba(84, 84, 84, .48);
+  width: 500px;
+  margin: 0 auto;
+  padding: 20px;
+  padding-right: 60px;
+  border-radius: 10px;
+}
+.change-password-body input {
+  background: none;
+  border:  1px solid #42b883;
+  border-radius: 15px;
+  padding: 0 10px;
+  color:rgba(255, 255, 255, 0.87);
+  width: 250px;
+}
+.change-password-body ul {
+list-style-type: none;
+margin-top: 20px;
+margin-bottom: 50px;
+}
+.help-body {
+  border: 1px solid rgba(235, 235, 235, .6);
+  border-radius: 10px;
+  width: 500px;
+  margin: 0 auto;
+  padding: 30px;
+}
+.help-body h1 {
+  color: #42b883;
+}
+.add-destination-body h1{
+color: #42b883;
+margin-bottom:30px;
+}
+.add-destination-body select {
+  width:250px;
+}
+
+@media only screen and (max-width: 1000px) {
+  .card {
+    width: 600px;
+  }
+  .card-comment {
+    width: 620px;
+  }
+}
+
+@media only screen and (max-width: 620px) {
+  .card {
+    width: 400px;
+  }
+  .card-comment {
+    width: 400px;
+  }
 }

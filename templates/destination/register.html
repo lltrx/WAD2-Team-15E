@@ -11,7 +11,7 @@ Register
 		<a href="{% url 'destination:index' %}">Go to the homepage.</a><br />
 	{% else %}
 		<h2 class="login-title">Register</h1>
-		<form id="user_form" method="POST" action="{% url 'destination:register' %}" enctype="multipart/form-data" >
+		<form id="user_form" class="form" method="POST" action="{% url 'destination:register' %}" enctype="multipart/form-data" >
 			{% csrf_token %}
 			{% if user_error %}
 				{{ user_error }}
@@ -52,7 +52,7 @@ Register
 				{{ user_profile_form.about }}
 			</div>
 			<div class="form-group">
-			<button type="submit" class="login-button btn btn-primary">Register</button>
+			<button type="submit" class="custom-button login-button btn btn-primary">Register</button>
 
 			</div>
 		</form>
