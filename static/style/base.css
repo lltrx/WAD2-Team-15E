@@ -110,11 +110,25 @@ nav {
 
 #front-page-banner h2{
   font-weight: bold;
+  font-size: 50px;
 }
 
-#front-page-banner p{
+#front-page-banner #banner-scroll {
   margin-top: 30px;
   font-size: 60%;
+  cursor: pointer;
+  -o-transition: 0.3s all ease-in-out;
+  -moz-transition: 0.3s all ease-in-out;
+  -webkit-transition: 0.3s all ease-in-out;
+  transition: 0.3s all ease-in-out;
+  font-size: 15px;
+}
+
+#front-page-banner #banner-scroll:hover {
+  -ms-transform: translateY(-10px);
+  -moz-transform: translateY(-10px);
+  -webkit-transform: translateY(-10px);
+  transform: translateY(-10px);
 }
 
 .front-page-section {
@@ -417,6 +431,7 @@ nav {
 
 .profile-body img {
   height: 300px;
+  width: auto;
   margin: 30px 0;
 }
 .form {
@@ -426,7 +441,6 @@ nav {
   padding: 20px;
   padding-right: 60px;
   border-radius: 10px;
-
 }
 .form label {
   margin-right: 5px;
