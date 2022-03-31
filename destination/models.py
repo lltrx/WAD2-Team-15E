@@ -37,7 +37,7 @@ class Destination(models.Model):
         comments = Comment.objects.filter(destination=self)
         rating_total = 0
         if comments.count() == 0:
-            return "No ratings yet"
+            return 0
         else:
             for rating in comments:
                 rating_total += rating.rate

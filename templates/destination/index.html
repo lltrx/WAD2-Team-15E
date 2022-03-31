@@ -18,7 +18,54 @@ Homepage
 	<div id="banner-filter"></div>
 </div>
 
-<div>
-  <h2>Most Liked Destinations</h2>
+<div class="front-page-section">
+  <h2 id="destination-title">Best Rated Destinations</h2>
+  {% if best_rated %}
+      {% for dest in best_rated %}
+     
+        <ul class="list-group list-group-flush">
+	      <div class="card">
+	        
+	      {% if dest.image %}
+	        <img src="{{ dest.image.url }}" class="card-img-top">
+	      {% endif %}
+	        <h5 class="card-title">{{ dest.name }}</h5>
+	        <p class="card-rating">Rating: {{ dest.total_rating }}</p>
+	        <p class="card-text">{{ dest.description }}</p>
+	       
+	        <a href="{% url 'destination:show_destination' dest.slug %}" class="view" data-toggle="tooltip" data-placement="top" title="View the destination"><i class="fa-solid fa-arrow-right-long"></i></a>
+	      </div>
+    	</ul>
+      {% endfor %}
+    
+    {% else %}
+    <strong>There are no destinations present.</strong>
+    {% endif %}
 </div>
+
+<div class="front-page-section">
+  <h2>Most Liked Destinations</h2>
+  {% if most_liked %}
+      {% for dest in most_liked %}
+     
+        <ul class="list-group list-group-flush">
+	      <div class="card">
+	        
+	      {% if dest.image %}
+	        <img src="{{ dest.image.url }}" class="card-img-top">
+	      {% endif %}
+	        <h5 class="card-title">{{ dest.name }}</h5>
+	        <p class="card-likes">Likes: {{ dest.total_likes }}</p>
+	        <p class="card-text">{{ dest.description }}</p>
+	       
+	        <a href="{% url 'destination:show_destination' dest.slug %}" class="view" data-toggle="tooltip" data-placement="top" title="View the destination"><i class="fa-solid fa-arrow-right-long"></i></a>
+	      </div>
+    	</ul>
+      {% endfor %}
+    
+    {% else %}
+    <strong>There are no destinations present.</strong>
+    {% endif %}
+</div>
+<script src="/static/style/destination_menu.js"></script>
 {% endblock %}

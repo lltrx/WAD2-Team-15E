@@ -14,6 +14,10 @@ from django.contrib.auth.forms import UserChangeForm, UserCreationForm, Password
 
 def index(request):
     context_dict = {}
+    most_liked = sorted(Destination.objects.all(), key=lambda x: - x.total_likes())[:3]
+    context_dict['most_liked'] = most_liked
+    best_rated = sorted(Destination.objects.all(), key=lambda x: - x.total_rating())[:3]
+    context_dict['best_rated'] = best_rated
     return render(request, 'destination/index.html', context=context_dict)
  
 
@@ -172,6 +176,8 @@ def show_destination(request, destination_name_slug):
         context_dict['total_likes'] = total_likes
         
         total_rating = destination.total_rating()
+        if total_rating == 0:
+            total_rating = "No ratings yet"
         context_dict['total_rating'] = total_rating
         
         liked = False
