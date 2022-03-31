@@ -55,7 +55,7 @@ class Comment(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     text = models.TextField()
     created_date = models.DateTimeField(auto_now_add=True)
-    rate = models.PositiveSmallIntegerField(choices=Rate_Choices)
+    rate = models.PositiveSmallIntegerField(choices=Rate_Choices, null=False)
         
     def __str__(self):
         return '%s - %s' % (self.user.username, self.destination.name)
