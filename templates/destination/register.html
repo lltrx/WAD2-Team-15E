@@ -14,7 +14,20 @@ Register
 		<form id="user_form" class="form" method="POST" action="{% url 'destination:register' %}" enctype="multipart/form-data" >
 			{% csrf_token %}
 			{% if user_error %}
-				{{ user_error }}
+			<ul class="errorlist">
+				<div class="alert alert-danger" role="alert">
+				Password :
+					<ul class="errorlist">
+						The two password fields didn't match.
+					</ul>
+				</div>
+				<div class="alert alert-danger" role="alert">
+				Username :
+					<ul class="errorlist">
+						A user with that username already exists.
+					</ul>
+			</ul>
+		</div>
 			{% endif %}
 			{% if user_profile_error %}
 				{{ user_profile_error }}
